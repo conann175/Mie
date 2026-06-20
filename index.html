@@ -323,6 +323,7 @@
     .interlude{margin:24px auto 4px;font-size:15px;letter-spacing:.02em}
     .interlude::before,.interlude::after{margin:0 .35em}
     .kfacts{grid-template-columns:1fr}
+    .gcards{grid-template-columns:1fr}
     .kbody p{font-size:15px;line-height:2}
     .khero{padding:96px 0 40px}
   }
@@ -397,6 +398,31 @@
     border-radius:999px;padding:11px 24px;transition:background .2s,color .2s}
   .kback a:hover{background:var(--sugi);color:#f1ead9}
 
+  /* ============ おかげ横丁の美味ページ ============ */
+  .fhero{position:relative;min-height:46vh;display:flex;align-items:flex-end;color:#f6f1e6;overflow:hidden;background:var(--sugi)}
+  .fhero .ph{position:absolute;inset:0}
+  .fhero::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(0deg,rgba(9,20,15,.88) 6%,rgba(9,20,15,.28) 60%,rgba(9,20,15,.22) 100%)}
+  .fhero .fin{position:relative;z-index:2;width:100%;padding:96px 0 30px}
+  .fhero .eyebrow{font-family:var(--latin);letter-spacing:.4em;text-transform:uppercase;
+    color:var(--kin-light);font-size:12.5px;margin:0 0 12px}
+  .fhero h1{font-family:var(--mincho);font-weight:800;font-size:clamp(30px,8vw,52px);margin:0;letter-spacing:.06em}
+  .fhero .lead{margin:14px 0 0;max-width:560px;font-size:13.5px;color:#e7e0cf;line-height:1.9}
+  .gcards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px}
+  .gcard{background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column}
+  .gcard .gimg{position:relative;height:170px;background:linear-gradient(135deg,var(--sugi),var(--matsu))}
+  .gcard .gimg img{width:100%;height:100%;object-fit:cover;display:block}
+  .gcard .gimg.noimg{display:flex;align-items:center;justify-content:center;height:92px;
+    background:linear-gradient(135deg,var(--sugi),var(--matsu))}
+  .gcard .gimg.noimg .ic{font-size:32px;color:rgba(244,239,227,.92)}
+  .gcard .gtext{padding:15px 16px 17px}
+  .gcard h3{font-family:var(--mincho);font-weight:700;font-size:17px;margin:0 0 3px;color:#28311f;letter-spacing:.03em}
+  .gcard .est{font-family:var(--latin);font-style:italic;font-size:11.5px;color:var(--kin);letter-spacing:.06em;display:block;margin-bottom:8px}
+  .gcard p{margin:0;font-size:12.5px;line-height:1.85;color:#3c453a}
+  .gnote{background:rgba(183,145,63,.08);border-left:3px solid var(--kin);padding:14px 16px;margin-top:8px;border-radius:0 4px 4px 0}
+  .gnote h3{font-family:var(--mincho);font-weight:700;font-size:15px;margin:0 0 6px;color:var(--sugi)}
+  .gnote p{margin:0;font-size:13px;line-height:1.85;color:#3c453a}
+
 </style>
 </head>
 <body>
@@ -414,6 +440,7 @@
     <a href="#" data-nav data-page="page-shiori" data-anchor="tips">旅のワンポイント<span class="en2">Travel Tips</span></a>
     <div class="msep"></div>
     <a href="#" data-nav data-page="page-knowledge" class="feature">三重・伊勢の話<span class="en2">History &amp; Trivia</span></a>
+    <a href="#" data-nav data-page="page-food" class="feature">おかげ横丁の美味<span class="en2">Okage Yokocho Food</span></a>
   </div>
 </nav>
 
@@ -807,6 +834,113 @@
           <h3>「三重」の名の由来</h3>
           <p>日本武尊（やまとたけるのみこと）が東征の帰路、この地で「わが足、三重に曲がるほど疲れた」と嘆いたという古い伝説に由来するといわれます。</p>
         </div>
+        <div class="kcard reveal">
+          <div class="ic">🥷</div>
+          <h3>伊賀は忍者の里</h3>
+          <p>三重県西部の伊賀は、甲賀と並ぶ忍者の発祥地。伊賀流忍者博物館では仕掛け屋敷や忍術を体感できます。俳聖・松尾芭蕉もこの伊賀上野の生まれです。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🐕</div>
+          <h3>江戸の「おかげ参り」</h3>
+          <p>「一生に一度はお伊勢さん」。江戸時代には数百万人が伊勢を目指す熱狂が何度も起きました。飼い主の代わりにお参りした「おかげ犬」の逸話も残ります。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">⛩</div>
+          <h3>神嘗祭（かんなめさい）</h3>
+          <p>その年に実った新穀を、最初に天照大御神に捧げる秋のお祭り。数あるお祭りの中でも、神宮で最も大切とされる収穫祭です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🌿</div>
+          <h3>熊野古道・伊勢路</h3>
+          <p>伊勢神宮と熊野三山を結ぶ祈りの道。世界遺産「紀伊山地の霊場と参詣道」の一部で、苔むす石畳や峠が今も歩けます。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍵</div>
+          <h3>知る人ぞ知るお茶どころ</h3>
+          <p>三重は全国有数の茶の産地で、「伊勢茶」として親しまれています。深蒸し煎茶やかぶせ茶など、まろやかな味わいが特徴です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🏁</div>
+          <h3>F1も走る鈴鹿</h3>
+          <p>三重県鈴鹿市には、F1日本グランプリの舞台として知られる鈴鹿サーキットが。世界屈指のテクニカルコースとして有名です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ksection">
+    <div class="wrap">
+      <div class="khead reveal"><h2>内宮と外宮、何がちがう？</h2><span class="en">Naiku &amp; Geku</span></div>
+      <div class="ksteps reveal">
+        <div class="kstep">
+          <div class="no">内</div>
+          <div>
+            <h3>内宮（皇大神宮）</h3>
+            <p>太陽にもたとえられる皇室の御祖神・天照大御神をお祀りする、神宮の中心。五十鈴川と宇治橋、深い杜の荘厳さが見どころです。</p>
+          </div>
+        </div>
+        <div class="kstep">
+          <div class="no">外</div>
+          <div>
+            <h3>外宮（豊受大神宮）</h3>
+            <p>天照大御神のお食事を司る、衣食住・産業の守り神・豊受大御神をお祀りします。内宮より約500年あとに迎えられました。</p>
+          </div>
+        </div>
+        <div class="kstep">
+          <div class="no">順</div>
+          <div>
+            <h3>参拝は外宮から</h3>
+            <p>お祭りを外宮から行う「外宮先祭」にならい、参拝も外宮→内宮の順が古来のならわしとされています。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ksection">
+    <div class="wrap">
+      <div class="khead reveal"><h2>伊勢のディープな話</h2><span class="en">Deep Dive</span></div>
+      <div class="kfacts">
+        <div class="kcard reveal">
+          <div class="ic">🏮</div>
+          <h3>おかげ横丁の成り立ち</h3>
+          <p>赤福が、江戸から明治期の伊勢の門前町を再現して1993年に開いた一画。歴史ある町並みに見えて、実は“つくられた横丁”。それでも本物の名店が集い、いまや伊勢観光の主役です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">📜</div>
+          <h3>神宮の御朱印は素朴</h3>
+          <p>神宮の御朱印は、日付と社名の印のみのとても簡素なもの。華美な装飾がないのが神宮らしさです。内宮・外宮・別宮などでいただけます。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🌲</div>
+          <h3>遷宮を支える「200年の森」</h3>
+          <p>神宮は約5500haもの宮域林を持ち、式年遷宮に使う檜を200年かけて育てています。お参りで感じる深い杜の静けさは、こうして守られています。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">⛩</div>
+          <h3>夫婦岩と、二見の禊</h3>
+          <p>古来、参拝前には二見浦で心身を清める「禊（みそぎ）」をしました。二見興玉神社の夫婦岩は、沖に沈む霊石と日の出を拝むための鳥居の役割を担っています。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍢</div>
+          <h3>桑名から伊勢へ「餅街道」</h3>
+          <p>桑名から伊勢までの参宮街道は、別名「餅街道」。手早く食べられて腹持ちのよい餅が、旅人の道中食として愛されました。赤福・二軒茶屋餅・へんば餅・太閤出世餅などが今も並びます。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🔥</div>
+          <h3>海女小屋体験</h3>
+          <p>鳥羽・相差（おうさつ）では、海女さんと囲炉裏を囲む体験ができます。焼きたてのさざえや大あさり、干物を頬張りながら、海に生きる暮らしの話を聞ける貴重なひととき。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🌐</div>
+          <h3>賢島でG7サミット</h3>
+          <p>2016年、英虞湾に浮かぶ賢島（かしこじま）で「伊勢志摩サミット」（G7首脳会議）が開催されました。世界の首脳も訪れた、伊勢志摩の美しさが認められた舞台です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🐎</div>
+          <h3>神様の馬「神馬」</h3>
+          <p>神宮には皇室から贈られた神馬（しんめ）がいて、月に数回、正宮へお参りする「神馬牽参」が見られることも。白い神馬に出会えたら、ちょっと幸運です。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -850,6 +984,177 @@
     </div>
   </section>
 </main><!-- /page-knowledge -->
+
+<!-- ============ おかげ横丁の美味（別ページ） ============ -->
+<main id="page-food" class="page" hidden>
+  <header class="fhero">
+    <div class="ph" data-slideshow>
+      <img alt="おかげ横丁の街並み" loading="lazy" style="object-position:50% 45%" src="https://commons.wikimedia.org/wiki/Special:FilePath/JP-Mie-Ise-Grand-Shrine-Okage-Yokocho.JPG?width=1400">
+    </div>
+    <div class="fin">
+      <div class="wrap">
+        <p class="eyebrow">Okage Yokocho Food</p>
+        <h1>おかげ横丁の美味</h1>
+        <p class="lead">石畳の横丁を、つまみ食いしながら歩くのが伊勢の醍醐味。赤福から豚捨のコロッケまで、外せない名物を集めました。</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="ksection">
+    <div class="wrap">
+      <div class="khead reveal"><h2>看板グルメ</h2><span class="en">Must-eat</span></div>
+      <div class="gcards">
+        <div class="gcard reveal">
+          <div class="gimg">
+            <img alt="赤福餅" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Akafuku_mochi_by_hirotomo_in_Ise,_Mie.jpg?width=900">
+          </div>
+          <div class="gtext">
+            <h3>赤福本店</h3>
+            <span class="est">since 1707</span>
+            <p>宝永4年（1707年）創業。つくりたての赤福餅を、店内の「お召し上がり盆」（赤福2つ＋ほうじ茶）で。やわらかな餅とこし餡の素朴な甘さは、五十鈴川のせせらぎをかたどった姿です。夏は赤福氷も。</p>
+          </div>
+        </div>
+        <div class="gcard reveal">
+          <div class="gimg noimg"><span class="ic">🥔</span></div>
+          <div class="gtext">
+            <h3>豚捨（ぶたすて）のコロッケ</h3>
+            <span class="est">since 1909</span>
+            <p>明治42年創業の老舗精肉店。名物コロッケ（税込100円）は1日1,000個売れることもある行列の人気者。サクッと軽く、食べ歩きにちょうど良いサイズ。店内では伊勢肉の牛丼やすき焼きも。</p>
+          </div>
+        </div>
+        <div class="gcard reveal">
+          <div class="gimg">
+            <img alt="伊勢うどん" loading="lazy" style="object-position:50% 55%" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ise_Udon_by_Kinoko.JPG?width=900">
+          </div>
+          <div class="gtext">
+            <h3>伊勢うどん</h3>
+            <span class="est">Ise Udon</span>
+            <p>極太でやわらかく煮た麺に、たまり醤油の濃いタレをからめる伊勢の郷土めし。見た目より優しい味で、つるんと食べられます。横丁では伊勢“焼き”うどんも人気。</p>
+          </div>
+        </div>
+        <div class="gcard reveal">
+          <div class="gimg noimg"><span class="ic">🍣</span></div>
+          <div class="gtext">
+            <h3>手こね寿司</h3>
+            <span class="est">Tekone Sushi</span>
+            <p>カツオを醤油ダレに漬け、酢飯と手で“こねた”漁師めしが起源。鰹の旨みと生姜・大葉の香りがきいた、伊勢志摩を代表する一品です。</p>
+          </div>
+        </div>
+        <div class="gcard reveal">
+          <div class="gimg noimg"><span class="ic">🍮</span></div>
+          <div class="gtext">
+            <h3>伊勢プリンの鉄人</h3>
+            <span class="est">Ise Pudding</span>
+            <p>おはらい町のプリン専門店。マダガスカル産の最高級バニラを使い、職人が店内で手づくり。日本初という実演の「プリントースト」や、プリンにソフトをのせた「プリンソフト」が行列の人気。「なめらかプリン」の生みの親・所パティシエ監修です。</p>
+          </div>
+        </div>
+        <div class="gcard reveal">
+          <div class="gimg noimg"><span class="ic">🥛</span></div>
+          <div class="gtext">
+            <h3>山村みるくがっこう</h3>
+            <span class="est">Milk Sweets</span>
+            <p>三重の牧場が営むミルクスイーツ店。搾りたて牛乳のソフトクリームや飲むヨーグルトが、横丁歩きのクールダウンにぴったりです。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ksection">
+    <div class="wrap">
+      <div class="khead reveal"><h2>食べ歩きリスト</h2><span class="en">Street Bites</span></div>
+      <div class="kfacts">
+        <div class="kcard reveal">
+          <div class="ic">🐚</div>
+          <h3>あわび串</h3>
+          <p>おはらい町の屋台で、ボイルしたあわびを串で。焼き塩かバター醤油で。三重のあわび漁は1/1〜9/14なので、6月の旅ならちょうど旬です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🥩</div>
+          <h3>松阪牛 串・肉そば</h3>
+          <p>ブランド牛・松阪牛を、にぎりや串、かつお出汁の「松阪牛肉そば」で気軽に味わえます。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍡</div>
+          <h3>みたらし団子</h3>
+          <p>炭火で香ばしく焼いた団子に甘辛い醤油だれ。横丁歩きの定番おやつです。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍮</div>
+          <h3>五十鈴茶屋のスイーツ</h3>
+          <p>赤福の姉妹店。シュークリームやプリン、季節の和菓子など、甘いもので休憩を。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🦪</div>
+          <h3>海鮮の浜焼き</h3>
+          <p>牡蠣・さざえ・干物など、伊勢志摩の海の幸をその場で焼いて。磯の香りがたまりません。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍺</div>
+          <h3>伊勢角屋麦酒（地ビール）</h3>
+          <p>世界的な受賞歴を持つ伊勢の地ビール。牡蠣や揚げ物と合わせて、横丁で一杯も乙です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍦</div>
+          <h3>豆腐庵山中のおとうふソフト</h3>
+          <p>五十鈴川の水と天然にがりで作るお豆腐屋さんのスイーツ。豆腐入りのさっぱりソフト（320円ほど）や、おからの「うの花どーなつ」が食べ歩きに人気。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍠</div>
+          <h3>ハニポテ</h3>
+          <p>はちみつ専門店「松治郎の舗」の屋台で売られる、はちみつがけ大学芋。表面はカリッ・中はしっとりで、行列ができる人気商品です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🐟</div>
+          <h3>若松屋の揚げ練り物</h3>
+          <p>創業100年超のかまぼこ店。揚げたての「ひりょうず」やチーズはんぺん棒など、アツアツの練り物を片手で頬張れます。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">☕</div>
+          <h3>五十鈴川カフェ</h3>
+          <p>おはらい町から少し奥まった、五十鈴川を望むカフェ。ネルドリップの本格コーヒーとスイーツで、歩き疲れにひと休みを。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍣</div>
+          <h3>松阪牛のにぎり</h3>
+          <p>あぶった松阪牛をシャリにのせた、贅沢な肉寿司。1貫から食べ歩けるので、ちょっとした“ごほうび”にぴったりです。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍵</div>
+          <h3>岩戸屋の岩戸餅・神代餅</h3>
+          <p>おはらい町の老舗餅店。きな粉やこし餡をまとった素朴な餅は、お茶うけにもお土産にも。伊勢の昔ながらの味わいです。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍡</div>
+          <h3>へんば餅（へんばや商店）</h3>
+          <p>安永4年（1775年）創業。米粉の餅皮にこし餡を包み、両面を香ばしく焼いた素朴な餅。名は、宮川の渡しで参宮客が馬を返した「返馬（へんば）」に由来します。1個80円ほどで、店先で焼きたてを。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍧</div>
+          <h3>赤福氷（夏季限定）</h3>
+          <p>抹茶蜜のかき氷の中に、赤福の餡と餅が入った夏の名物。例年5月頃から登場するので、6月の旅ならちょうど味わえます。火照った体にうれしい一杯。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍵</div>
+          <h3>太閤出世餅</h3>
+          <p>永禄8年（1565年）創業。つぶ餡を包んで手焼きにした素朴な餅で、天下人・豊臣秀吉が「美味也」と賞賛したのが名の由来とか。内宮宇治橋前の茶屋でいただけます。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍡</div>
+          <h3>二軒茶屋餅</h3>
+          <p>天正年間（1575年）創業の角屋本店。こし餡を薄い餅皮で包み、挽きたてのきな粉をまぶした昔ながらのきなこ餅。舟参宮客でにぎわった港町・二軒茶屋が名の由来です。</p>
+        </div>
+      </div>
+      <div class="gnote reveal">
+        <h3>6月下旬の食べ歩きメモ</h3>
+        <p>ちょうど夏の「赤福氷」が始まる頃。あわび串も漁期内で楽しめます。食べ歩きの食べ残しは持ち帰り、ゴミは各店やゴミ箱へ。歩きながらより、店先のベンチでひと息つくと景観も楽しめます。</p>
+      </div>
+      <div class="kback reveal">
+        <a href="#" data-nav data-page="page-shiori">← 旅のしおりへ戻る</a>
+      </div>
+    </div>
+  </section>
+</main><!-- /page-food -->
 
 <script>
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
