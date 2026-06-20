@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>RUN & EAT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0a0a0f; color: #f0f0f0; font-family: 'Noto Sans JP', sans-serif; min-height: 100vh; padding-bottom: 100px; }
+
+    #header { background: linear-gradient(135deg, #111, #1a1a2e); border-bottom: 3px solid #ffd700; padding: 18px 20px 14px; }
+    #header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: 4px; color: #ffd700; line-height: 1; }
+    #header p { font-size: 12px; color: #888; margin-top: 2px; }
+
+    #main { max-width: 480px; margin: 0 auto; padding: 0 16px; }
+
+    /* Point Card */
+    #pt-card { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid rgba(255,215,0,0.27); border-radius: 16px; padding: 20px; margin-top: 20px; position: relative; overflow: hidden; }
+    #pt-card::after { content:''; position:absolute; top:-20px; right:-20px; width:120px; height:120px; background: radial-gradient(circle, rgba(255,215,0,0.13), transparent); border-radius: 50%; }
+    .pt-row { display: flex; gap: 12px; }
+    .pt-box { flex: 1; }
+    .pt-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+    .pt-num { font-family:'Bebas Neue',sans-serif; font-size: 52px; color: #ffd700; line-height: 1; }
+    .pt-num.spent { color: #ff8c00; }
+    .pt-num.remain { color: #7fff7f; }
+    .pt-unit { font-family:'Bebas Neue',sans-serif; font-size: 18px; color: #666; }
+    .divider { width: 1px; background: #333; margin: 4px 0; }
+
+    /* Tabs */
+    #tabs { display: flex; gap: 8px; margin-top: 20px; }
+    .tab-btn { flex: 1; padding: 10px 0; border-radius: 10px; font-size: 13px; font-weight: 700; border: 1px solid #333; background: #1a1a2e; color: #666; cursor: pointer; font-family: 'Noto Sans JP'; transition: all 0.2s; }
+    .tab-btn.active { background: #ffd700; color: #0a0a0f; border: none; }
+
+    .panel { display: none; margin-top: 20px; }
+    .panel.active { display: block; }
+
+    .card { background: #1a1a2e; border: 1px solid #333; border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+    .card-title { font-size: 13px; color: #888; margin-bottom: 12px; }
+    .card-title.gold { color: #ffd700; font-weight: 700; }
+
+    /* Run input */
+    #run-row { display: flex; gap: 10px; }
+    #run-wrap { flex: 1; position: relative; }
+    #run-input { width: 100%; background: #0a0a0f; border: 2px solid #333; border-radius: 10px; padding: 14px 50px 14px 16px; color: #fff; font-size: 28px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; outline: none; -webkit-appearance: none; }
+    #run-km-label { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #555; font-family: 'Bebas Neue'; font-size: 18px; }
+    #run-btn { background: #ffd700; color: #0a0a0f; border-radius: 10px; padding: 0 22px; font-size: 24px; font-weight: 900; cursor: pointer; border: none; font-family: 'Noto Sans JP'; }
+    #run-btn:active { transform: scale(0.95); }
+
+    /* Food list */
+    .food-item { border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; border: 1px solid #333; background: #1a1a2e; }
+    .food-item.cant { opacity: 0.4; }
+    .food-info { flex: 1; }
+    .food-name { font-weight: 700; font-size: 15px; }
+    .food-cost { font-family: 'Bebas Neue'; font-size: 18px; color: #ff8c00; letter-spacing: 1px; }
+    .eat-btn { background: #ff8c00; color: #fff; border: none; border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans JP'; flex-shrink: 0; }
+    .eat-btn:active { transform: scale(0.95); }
+    .eat-btn:disabled { background: #333; color: #555; cursor: not-allowed; }
+    .del-btn { background: rgba(255,255,255,0.07); color: #666; border: 1px solid #333; border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; font-family: 'Noto Sans JP'; flex-shrink: 0; }
+    .del-btn:active { background: #ff4444; color: #fff; }
+
+    /* Goal form */
+    .form-row { display: flex; gap: 8px; margin-bottom: 10px; }
+    #emoji-input { width: 52px; background: #0a0a0f; border: 1px solid #333; border-radius: 8px; padding: 10px; color: #fff; font-size: 22px; text-align: center; outline: none; }
+    .text-input { flex: 1; background: #0a0a0f; border: 1px solid #333; border-radius: 8px; padding: 10px 14px; color: #fff; font-size: 14px; font-family: 'Noto Sans JP'; outline: none; }
+    .num-wrap { flex: 1; position: relative; }
+    .num-input { width: 100%; background: #0a0a0f; border: 1px solid #333; border-radius: 8px; padding: 10px 36px 10px 14px; color: #fff; font-size: 14px; font-family: 'Noto Sans JP'; outline: none; -webkit-appearance: none; }
+    .num-unit { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555; font-size: 12px; }
+    .add-btn { background: #ffd700; color: #0a0a0f; border-radius: 8px; padding: 0 20px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; font-family: 'Noto Sans JP'; }
+    .add-btn:active { transform: scale(0.95); }
+
+    #reset-btn { width: 100%; margin-top: 20px; padding: 14px; background: transparent; border: 1px solid rgba(255,68,68,0.27); border-radius: 10px; color: #ff6666; font-size: 13px; cursor: pointer; font-family: 'Noto Sans JP'; }
+
+    /* Log */
+    #log-title { font-size: 13px; color: #888; margin-bottom: 12px; }
+    .log-item { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    .log-item.eat-log { border-color: rgba(255,140,0,0.3); }
+    .log-badge { font-family: 'Bebas Neue'; font-size: 22px; min-width: 64px; }
+    .log-badge.run { color: #ffd700; }
+    .log-badge.eat { color: #ff8c00; }
+    .log-detail { font-size: 12px; color: #666; margin-top: 2px; }
+    .log-num { font-size: 11px; color: #444; margin-left: auto; flex-shrink: 0; }
+    .log-del { background: transparent; border: none; color: #444; font-size: 18px; cursor: pointer; padding: 0 4px; flex-shrink: 0; }
+    .log-del:active { color: #ff4444; }
+    #empty-log { text-align: center; color: #444; padding: 40px; border: 1px dashed #222; border-radius: 12px; }
+
+    /* Toast */
+    #toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); padding: 12px 24px; border-radius: 99px; font-size: 14px; font-weight: 700; z-index: 100; white-space: nowrap; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: none; animation: slideIn 0.3s ease; font-family: 'Noto Sans JP'; }
+
+    @keyframes slideIn { from{transform:translate(-50%,-20px);opacity:0} to{transform:translate(-50%,0);opacity:1} }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input::placeholder { color: #444; }
+  </style>
+</head>
+<body>
+
+<div id="header">
+  <h1>RUN & EAT</h1>
+  <p>走った分だけ食べていい</p>
+</div>
+
+<div id="main">
+  <!-- Point Card -->
+  <div id="pt-card">
+    <div class="pt-row">
+      <div class="pt-box">
+        <div class="pt-label">🏃 獲得ポイント</div>
+        <div><span id="pt-earned" class="pt-num">0</span><span class="pt-unit"> pt</span></div>
+      </div>
+      <div class="divider"></div>
+      <div class="pt-box">
+        <div class="pt-label">🍽️ 消費ポイント</div>
+        <div><span id="pt-spent" class="pt-num spent">0</span><span class="pt-unit"> pt</span></div>
+      </div>
+      <div class="divider"></div>
+      <div class="pt-box">
+        <div class="pt-label">✨ 残りポイント</div>
+        <div><span id="pt-remain" class="pt-num remain">0</span><span class="pt-unit"> pt</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tabs">
+    <button class="tab-btn active" onclick="switchTab('run')">🏃 記録</button>
+    <button class="tab-btn" onclick="switchTab('food')">🍽️ 食べる</button>
+    <button class="tab-btn" onclick="switchTab('log')">📋 履歴</button>
+  </div>
+
+  <!-- Run Panel -->
+  <div id="panel-run" class="panel active">
+    <div class="card">
+      <div class="card-title">走った距離を入力（1km = 1pt）</div>
+      <div id="run-row">
+        <div id="run-wrap">
+          <input id="run-input" type="number" inputmode="decimal" placeholder="0.0" min="0" step="0.1" />
+          <span id="run-km-label">KM</span>
+        </div>
+        <button id="run-btn" onclick="addRun()">＋</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Food Panel -->
+  <div id="panel-food" class="panel">
+    <div class="card">
+      <div class="card-title gold">＋ 食べ物を追加</div>
+      <div class="form-row">
+        <input id="emoji-input" type="text" placeholder="🍔" maxlength="2" />
+        <input id="food-input" class="text-input" type="text" placeholder="食べ物の名前" />
+      </div>
+      <div class="form-row">
+        <div class="num-wrap">
+          <input id="cost-input" class="num-input" type="number" inputmode="decimal" placeholder="必要pt" min="1" step="1" />
+          <span class="num-unit">pt</span>
+        </div>
+        <button class="add-btn" onclick="addFood()">追加</button>
+      </div>
+    </div>
+    <div id="food-list"></div>
+    <button id="reset-btn" onclick="resetData()">🔄 データをリセット</button>
+  </div>
+
+  <!-- Log Panel -->
+  <div id="panel-log" class="panel">
+    <div id="log-title">履歴（タップで削除）</div>
+    <div id="log-list"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  const STORAGE_KEY = 'run-eat-v2';
+  const DEFAULT_FOODS = [
+    { id: 1, emoji: '🍜', name: 'ラーメン', cost: 5 },
+    { id: 2, emoji: '🍕', name: 'ピザ',     cost: 10 },
+    { id: 3, emoji: '🥩', name: '焼肉',     cost: 21 },
+  ];
+
+  let state = {
+    foods: JSON.parse(JSON.stringify(DEFAULT_FOODS)),
+    logs: []  // { id, type:'run'|'eat', km?, foodId?, foodName?, foodEmoji?, cost?, pt, date, time }
+  };
+
+  function load() {
+    try {
+      const s = localStorage.getItem(STORAGE_KEY);
+      if (s) state = JSON.parse(s);
+    } catch(e) {}
+  }
+
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function calcPoints() {
+    let earned = 0, spent = 0;
+    state.logs.forEach(l => {
+      if (l.type === 'run') earned += l.pt;
+      if (l.type === 'eat') spent += l.pt;
+    });
+    return { earned: parseFloat(earned.toFixed(1)), spent: parseFloat(spent.toFixed(1)), remain: parseFloat((earned - spent).toFixed(1)) };
+  }
+
+  function render() {
+    const { earned, spent, remain } = calcPoints();
+    document.getElementById('pt-earned').textContent = earned;
+    document.getElementById('pt-spent').textContent  = spent;
+    document.getElementById('pt-remain').textContent = remain;
+    document.getElementById('pt-remain').style.color = remain < 0 ? '#ff6666' : '#7fff7f';
+
+    // Food list
+    document.getElementById('food-list').innerHTML = state.foods.map(f => {
+      const canEat = remain >= f.cost;
+      return `
+        <div class="food-item ${!canEat ? 'cant' : ''}">
+          <span style="font-size:28px">${f.emoji}</span>
+          <div class="food-info">
+            <div class="food-name">${f.name}</div>
+            <div class="food-cost">${f.cost} PT 必要</div>
+          </div>
+          <button class="eat-btn" onclick="eatFood(${f.id})" ${!canEat ? 'disabled' : ''}>食べた！</button>
+          <button class="del-btn" onclick="deleteFood(${f.id})">削除</button>
+        </div>`;
+    }).join('') || '<div style="text-align:center;color:#444;padding:30px;border:1px dashed #222;border-radius:12px;font-size:13px">食べ物を追加してください</div>';
+
+    // Log list
+    document.getElementById('log-list').innerHTML = state.logs.length === 0
+      ? `<div id="empty-log">まだ記録がありません</div>`
+      : state.logs.map((l, i) => {
+          const isRun = l.type === 'run';
+          return `
+            <div class="log-item ${isRun ? '' : 'eat-log'}">
+              <div>
+                <div class="log-badge ${isRun ? 'run' : 'eat'}">
+                  ${isRun ? `${l.km}<span style="font-size:13px;color:#666">km</span>` : `${l.foodEmoji} -${l.pt}<span style="font-size:13px;color:#666">pt</span>`}
+                </div>
+                <div class="log-detail">${isRun ? `+${l.pt}pt` : l.foodName} ・ ${l.date} ${l.time}</div>
+              </div>
+              <span class="log-num">#${state.logs.length - i}</span>
+              <button class="log-del" onclick="deleteLog(${l.id})" title="削除">✕</button>
+            </div>`;
+        }).join('');
+  }
+
+  function addRun() {
+    const val = parseFloat(document.getElementById('run-input').value);
+    if (!val || val <= 0) return showToast('正しい距離を入力してください', 'error');
+    const now = new Date();
+    state.logs.unshift({
+      id: Date.now(), type: 'run', km: val, pt: parseFloat(val.toFixed(1)),
+      date: now.toLocaleDateString('ja-JP'),
+      time: now.toLocaleTimeString('ja-JP', { hour:'2-digit', minute:'2-digit' })
+    });
+    document.getElementById('run-input').value = '';
+    save();
+    showToast(`✅ ${val}km → +${val}pt 獲得！`);
+    render();
+  }
+
+  function addFood() {
+    const cost = parseFloat(document.getElementById('cost-input').value);
+    const name = document.getElementById('food-input').value.trim();
+    const emoji = document.getElementById('emoji-input').value.trim() || '🍔';
+    if (!cost || !name) return showToast('名前と必要ptを入力してください', 'error');
+    state.foods.push({ id: Date.now(), emoji, name, cost });
+    document.getElementById('cost-input').value = '';
+    document.getElementById('food-input').value = '';
+    document.getElementById('emoji-input').value = '';
+    save();
+    showToast('食べ物を追加しました！');
+    render();
+  }
+
+  function eatFood(id) {
+    const food = state.foods.find(f => f.id === id);
+    if (!food) return;
+    const { remain } = calcPoints();
+    if (remain < food.cost) return showToast('ポイントが足りません！', 'error');
+    const now = new Date();
+    state.logs.unshift({
+      id: Date.now(), type: 'eat', foodId: id, foodName: food.name, foodEmoji: food.emoji, pt: food.cost,
+      date: now.toLocaleDateString('ja-JP'),
+      time: now.toLocaleTimeString('ja-JP', { hour:'2-digit', minute:'2-digit' })
+    });
+    save();
+    showToast(`🎉 ${food.emoji} ${food.name} を食べた！ -${food.cost}pt`, 'reward');
+    render();
+  }
+
+  function deleteFood(id) {
+    state.foods = state.foods.filter(f => f.id !== id);
+    save();
+    render();
+  }
+
+  function deleteLog(id) {
+    state.logs = state.logs.filter(l => l.id !== id);
+    save();
+    showToast('削除しました');
+    render();
+  }
+
+  function resetData() {
+    if (!confirm('データをリセットしますか？')) return;
+    state = { foods: JSON.parse(JSON.stringify(DEFAULT_FOODS)), logs: [] };
+    save();
+    render();
+  }
+
+  function showToast(msg, type = 'success') {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.style.background = type === 'reward' ? '#ffd700' : type === 'error' ? '#ff4444' : '#333';
+    el.style.color = type === 'reward' ? '#0a0a0f' : '#fff';
+    el.style.display = 'block';
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = 'slideIn 0.3s ease';
+    setTimeout(() => { el.style.display = 'none'; }, 3000);
+  }
+
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', ['run','food','log'][i] === name);
+    });
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+  }
+
+  load();
+  render();
+</script>
+</body>
+</html>
