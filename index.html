@@ -1,337 +1,959 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>RUN & EAT</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0a0a0f; color: #f0f0f0; font-family: 'Noto Sans JP', sans-serif; min-height: 100vh; padding-bottom: 100px; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>三重・伊勢鳥羽 旅のしおり｜2泊3日の美食と参拝の旅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sumi:#20271f;        /* 墨 */
+    --washi:#f4efe3;       /* 和紙 */
+    --washi-deep:#ece4d3;
+    --sugi:#163128;        /* 杉の深緑（神宮の杜） */
+    --sugi-2:#244b3c;
+    --matsu:#3a6a52;       /* 松 */
+    --shu:#bf432a;         /* 朱（鳥居） */
+    --shu-soft:#cf6a4f;
+    --kin:#b7913f;         /* 金・真鍮 */
+    --kin-light:#cdab63;
+    --umi:#2c6f74;         /* 海（鳥羽） */
+    --line:rgba(32,39,31,.16);
+    --mincho:"Shippori Mincho", serif;
+    --gothic:"Zen Kaku Gothic New", sans-serif;
+    --latin:"Cormorant Garamond", serif;
+  }
 
-    #header { background: linear-gradient(135deg, #111, #1a1a2e); border-bottom: 3px solid #ffd700; padding: 18px 20px 14px; }
-    #header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: 4px; color: #ffd700; line-height: 1; }
-    #header p { font-size: 12px; color: #888; margin-top: 2px; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--washi);
+    color:var(--sumi);
+    font-family:var(--gothic);
+    font-weight:400;
+    line-height:1.95;
+    letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  img{display:block;max-width:100%}
+  .wrap{max-width:940px;margin:0 auto;padding:0 26px}
 
-    #main { max-width: 480px; margin: 0 auto; padding: 0 16px; }
+  /* ===== 共通：写真フレーム／スライドショー（読み込み失敗時は緑グラデを表示） ===== */
+  .ph{
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg,var(--sugi),var(--matsu));
+  }
+  .ph img{
+    position:absolute;inset:0;
+    width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity 1.3s ease;
+  }
+  .ph img.show{opacity:1}
+  .ph img.failed{opacity:0}
 
-    /* Point Card */
-    #pt-card { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid rgba(255,215,0,0.27); border-radius: 16px; padding: 20px; margin-top: 20px; position: relative; overflow: hidden; }
-    #pt-card::after { content:''; position:absolute; top:-20px; right:-20px; width:120px; height:120px; background: radial-gradient(circle, rgba(255,215,0,0.13), transparent); border-radius: 50%; }
-    .pt-row { display: flex; gap: 12px; }
-    .pt-box { flex: 1; }
-    .pt-label { font-size: 11px; color: #888; margin-bottom: 4px; }
-    .pt-num { font-family:'Bebas Neue',sans-serif; font-size: 52px; color: #ffd700; line-height: 1; }
-    .pt-num.spent { color: #ff8c00; }
-    .pt-num.remain { color: #7fff7f; }
-    .pt-unit { font-family:'Bebas Neue',sans-serif; font-size: 18px; color: #666; }
-    .divider { width: 1px; background: #333; margin: 4px 0; }
+  /* ============ 表紙 ============ */
+  .cover{
+    position:relative;min-height:92vh;
+    display:flex;align-items:flex-end;
+    color:#f6f1e6;overflow:hidden;
+    background:var(--sugi);
+  }
+  .cover .ph{position:absolute;inset:0}
+  .cover::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg,rgba(12,24,18,.34) 0%,rgba(12,24,18,0) 30%),
+      linear-gradient(0deg,rgba(9,20,15,.86) 4%,rgba(9,20,15,.22) 42%,rgba(9,20,15,.18) 100%);
+  }
+  .cover-inner{position:relative;z-index:2;width:100%;padding:0 26px 64px}
+  .cover-inner .max{max-width:940px;margin:0 auto}
+  .cover .eyebrow{
+    font-family:var(--latin);font-size:clamp(13px,2.6vw,17px);
+    letter-spacing:.62em;text-transform:uppercase;
+    color:var(--kin-light);margin:0 0 18px;padding-left:.6em;
+  }
+  .cover h1{
+    font-family:var(--mincho);font-weight:800;
+    font-size:clamp(46px,12vw,104px);
+    line-height:1.04;margin:0;letter-spacing:.04em;
+    text-shadow:0 2px 30px rgba(0,0,0,.35);
+  }
+  .cover h1 small{
+    display:block;font-size:.34em;font-weight:600;
+    letter-spacing:.18em;color:#efe7d6;margin-top:.5em;opacity:.95;
+  }
+  .cover .meta{
+    display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;
+    margin-top:30px;padding-top:24px;
+    border-top:1px solid rgba(205,171,99,.5);
+  }
+  .cover .meta .date{
+    font-family:var(--latin);font-size:clamp(22px,5vw,34px);
+    font-weight:600;letter-spacing:.04em;color:#fff;
+  }
+  .cover .meta .tag{
+    font-family:var(--mincho);font-weight:600;letter-spacing:.22em;
+    font-size:clamp(13px,3vw,16px);color:#efe7d6;
+  }
+  .cover .meta .dot{width:5px;height:5px;border-radius:50%;background:var(--kin-light)}
 
-    /* Tabs */
-    #tabs { display: flex; gap: 8px; margin-top: 20px; }
-    .tab-btn { flex: 1; padding: 10px 0; border-radius: 10px; font-size: 13px; font-weight: 700; border: 1px solid #333; background: #1a1a2e; color: #666; cursor: pointer; font-family: 'Noto Sans JP'; transition: all 0.2s; }
-    .tab-btn.active { background: #ffd700; color: #0a0a0f; border: none; }
+  /* ============ 概要 ============ */
+  .overview{padding:78px 0 30px}
+  .lead-eyebrow{
+    font-family:var(--mincho);font-weight:600;color:var(--shu);
+    letter-spacing:.3em;font-size:14px;margin:0 0 14px;
+  }
+  .overview .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:46px;align-items:start}
+  .overview .lead{font-family:var(--mincho);font-size:clamp(19px,2.6vw,23px);line-height:2.1;font-weight:500;margin:0;color:#2a3328}
+  .overview .lead .drop{
+    float:left;font-family:var(--mincho);font-weight:800;color:var(--sugi);
+    font-size:3.3em;line-height:.82;margin:.08em .14em 0 -.04em;
+  }
+  .spec{border-top:2px solid var(--sugi)}
+  .spec dl{display:grid;grid-template-columns:auto 1fr;gap:0;margin:0}
+  .spec dt,.spec dd{margin:0;padding:16px 0;border-bottom:1px solid var(--line)}
+  .spec dt{
+    font-family:var(--mincho);font-weight:700;color:var(--sugi);
+    letter-spacing:.16em;font-size:15px;padding-right:20px;white-space:nowrap;
+  }
+  .spec dd{font-size:14.5px;line-height:1.85;color:#3a4338}
 
-    .panel { display: none; margin-top: 20px; }
-    .panel.active { display: block; }
+  /* ============ 日程セクション ============ */
+  .day{padding:40px 0 18px}
+  .day-band{position:relative;height:clamp(300px,52vw,470px);margin:18px 0 0}
+  .day-band .ph{position:absolute;inset:0}
+  .day-band::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(10,22,16,.72) 0%,rgba(10,22,16,.30) 46%,rgba(10,22,16,.05) 100%);
+  }
+  /* 縦書きの見出し（このしおりの“顔”） */
+  .day-title{
+    position:absolute;z-index:2;left:clamp(20px,4vw,42px);top:0;bottom:0;
+    display:flex;align-items:center;gap:clamp(14px,3vw,26px);
+    color:#f6f1e6;
+  }
+  .day-no{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .day-no .lat{
+    font-family:var(--latin);font-style:italic;font-weight:600;
+    font-size:clamp(15px,3vw,19px);letter-spacing:.08em;color:var(--kin-light);
+  }
+  .day-no .rule{width:1px;height:clamp(54px,9vw,84px);background:linear-gradient(var(--kin-light),transparent)}
+  .day-no .date{font-family:var(--latin);font-weight:600;font-size:clamp(26px,6vw,40px);letter-spacing:.02em}
+  .day-vtitle{
+    writing-mode:vertical-rl;text-orientation:upright;white-space:nowrap;
+    font-family:var(--mincho);font-weight:800;
+    font-size:clamp(30px,7.6vw,54px);letter-spacing:.14em;line-height:1.22;
+    text-shadow:0 2px 24px rgba(0,0,0,.4);align-self:center;
+  }
+  .day-vsub{
+    writing-mode:vertical-rl;text-orientation:upright;white-space:nowrap;
+    font-family:var(--mincho);font-weight:600;letter-spacing:.28em;line-height:1.2;
+    font-size:clamp(12px,3vw,15px);color:var(--kin-light);align-self:center;
+    text-shadow:0 2px 16px rgba(0,0,0,.5);
+  }
+  .day-badge{
+    position:absolute;z-index:2;right:clamp(16px,3vw,30px);bottom:clamp(16px,3vw,26px);
+    font-family:var(--mincho);font-weight:600;letter-spacing:.18em;
+    color:#efe7d6;font-size:13px;border:1px solid rgba(205,171,99,.6);
+    padding:7px 16px;backdrop-filter:blur(2px);background:rgba(12,24,18,.18);
+  }
+  .day2 .day-band::after{background:linear-gradient(90deg,rgba(10,22,16,.72) 0%,rgba(10,22,16,.30) 46%,rgba(10,22,16,.05) 100%)}
+  .day3 .day-band::after{background:linear-gradient(90deg,rgba(8,28,30,.72) 0%,rgba(8,28,30,.30) 46%,rgba(8,28,30,.05) 100%)}
+  .day3 .day-vsub{color:#8fd0cf}
+  .day3 .day-no .lat{color:#8fd0cf}
+  .day3 .day-no .rule{background:linear-gradient(#8fd0cf,transparent)}
+  .day3 .day-badge{border-color:rgba(143,208,207,.6)}
 
-    .card { background: #1a1a2e; border: 1px solid #333; border-radius: 16px; padding: 20px; margin-bottom: 16px; }
-    .card-title { font-size: 13px; color: #888; margin-bottom: 12px; }
-    .card-title.gold { color: #ffd700; font-weight: 700; }
+  /* タイムライン */
+  .timeline{margin:40px 0 8px;position:relative;padding-left:0}
+  .tl-row{display:grid;grid-template-columns:96px 1fr;gap:24px;position:relative;padding-bottom:34px}
+  .tl-row:last-child{padding-bottom:6px}
+  .tl-time{
+    font-family:var(--latin);font-weight:600;font-size:21px;letter-spacing:.02em;
+    color:var(--sugi);text-align:right;padding-top:1px;white-space:nowrap;
+  }
+  .day3 .tl-time{color:var(--umi)}
+  .tl-main{position:relative;padding-left:30px;border-left:1px solid var(--line)}
+  .tl-row:last-child .tl-main{border-left-color:transparent}
+  .tl-main::before{
+    content:"";position:absolute;left:-6px;top:7px;width:11px;height:11px;border-radius:50%;
+    background:var(--washi);border:2px solid var(--shu);
+  }
+  .day3 .tl-main::before{border-color:var(--umi)}
+  .tl-main h3{
+    font-family:var(--mincho);font-weight:700;font-size:20px;margin:0 0 8px;
+    color:#222b21;letter-spacing:.04em;
+  }
+  .tl-main h3 .pin{color:var(--shu);font-weight:700;margin-right:.4em}
+  .day3 .tl-main h3 .pin{color:var(--umi)}
+  .tl-main p{margin:0;font-size:14.5px;color:#3c453a;line-height:1.9}
 
-    /* Run input */
-    #run-row { display: flex; gap: 10px; }
-    #run-wrap { flex: 1; position: relative; }
-    #run-input { width: 100%; background: #0a0a0f; border: 2px solid #333; border-radius: 10px; padding: 14px 50px 14px 16px; color: #fff; font-size: 28px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; outline: none; -webkit-appearance: none; }
-    #run-km-label { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #555; font-family: 'Bebas Neue'; font-size: 18px; }
-    #run-btn { background: #ffd700; color: #0a0a0f; border-radius: 10px; padding: 0 22px; font-size: 24px; font-weight: 900; cursor: pointer; border: none; font-family: 'Noto Sans JP'; }
-    #run-btn:active { transform: scale(0.95); }
+  /* Googleマップへ飛ぶMAPボタン */
+  .maplink{
+    display:inline-flex;align-items:center;gap:6px;margin-top:11px;
+    font-family:var(--latin);font-weight:600;font-size:12.5px;letter-spacing:.2em;
+    color:var(--sugi);text-decoration:none;background:rgba(255,255,255,.5);
+    border:1px solid var(--line);border-radius:999px;padding:5px 14px;
+    transition:background .2s ease,color .2s ease,border-color .2s ease;
+  }
+  .maplink .ar{font-size:.95em;letter-spacing:0}
+  .maplink:hover,.maplink:focus-visible{background:var(--sugi);color:#f1ead9;border-color:var(--sugi);outline:none}
+  .day3 .maplink{color:var(--umi)}
+  .day3 .maplink:hover,.day3 .maplink:focus-visible{background:var(--umi);border-color:var(--umi);color:#fff}
+  .route .maplink{margin-top:12px;font-size:11.5px;padding:4px 12px}
+  .eatery .maplink{color:#ece3c8;background:transparent;border-color:rgba(205,171,99,.5);margin-top:12px;font-size:11.5px;padding:4px 12px}
+  .eatery .maplink:hover,.eatery .maplink:focus-visible{background:var(--kin);border-color:var(--kin);color:#20271f}
 
-    /* Food list */
-    .food-item { border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; border: 1px solid #333; background: #1a1a2e; }
-    .food-item.cant { opacity: 0.4; }
-    .food-info { flex: 1; }
-    .food-name { font-weight: 700; font-size: 15px; }
-    .food-cost { font-family: 'Bebas Neue'; font-size: 18px; color: #ff8c00; letter-spacing: 1px; }
-    .eat-btn { background: #ff8c00; color: #fff; border: none; border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans JP'; flex-shrink: 0; }
-    .eat-btn:active { transform: scale(0.95); }
-    .eat-btn:disabled { background: #333; color: #555; cursor: not-allowed; }
-    .del-btn { background: rgba(255,255,255,0.07); color: #666; border: 1px solid #333; border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; font-family: 'Noto Sans JP'; flex-shrink: 0; }
-    .del-btn:active { background: #ff4444; color: #fff; }
+  /* ルート選択 A / B カード */
+  .routes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0 4px}
+  .route{
+    border:1px solid var(--line);border-top:3px solid var(--sugi);
+    background:rgba(255,255,255,.45);padding:18px 18px 16px;border-radius:3px;
+  }
+  .route.b{border-top-color:var(--shu)}
+  .route .lbl{
+    font-family:var(--mincho);font-weight:700;letter-spacing:.12em;font-size:13px;
+    color:var(--sugi);display:flex;align-items:center;gap:9px;margin-bottom:10px;
+  }
+  .route.b .lbl{color:var(--shu)}
+  .route .lbl b{
+    font-family:var(--latin);font-style:italic;font-size:24px;line-height:1;
+    color:var(--kin);font-weight:600;
+  }
+  .route h4{font-family:var(--mincho);font-weight:700;font-size:16px;margin:0 0 8px;color:#28311f}
+  .route ul{margin:0;padding:0;list-style:none}
+  .route li{font-size:13.5px;line-height:1.75;padding-left:16px;position:relative;color:#3c453a;margin-bottom:5px}
+  .route li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:1px;background:var(--kin)}
+  .route li b{font-family:var(--latin);font-weight:600;color:var(--sugi);font-size:.96em;letter-spacing:.02em}
 
-    /* Goal form */
-    .form-row { display: flex; gap: 8px; margin-bottom: 10px; }
-    #emoji-input { width: 52px; background: #0a0a0f; border: 1px solid #333; border-radius: 8px; padding: 10px; color: #fff; font-size: 22px; text-align: center; outline: none; }
-    .text-input { flex: 1; background: #0a0a0f; border: 1px solid #333; border-radius: 8px; padding: 10px 14px; color: #fff; font-size: 14px; font-family: 'Noto Sans JP'; outline: none; }
-    .num-wrap { flex: 1; position: relative; }
-    .num-input { width: 100%; background: #0a0a0f; border: 1px solid #333; border-radius: 8px; padding: 10px 36px 10px 14px; color: #fff; font-size: 14px; font-family: 'Noto Sans JP'; outline: none; -webkit-appearance: none; }
-    .num-unit { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555; font-size: 12px; }
-    .add-btn { background: #ffd700; color: #0a0a0f; border-radius: 8px; padding: 0 20px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; font-family: 'Noto Sans JP'; }
-    .add-btn:active { transform: scale(0.95); }
+  /* 食事 おすすめ店 カード */
+  .eatery-head{
+    font-family:var(--mincho);font-weight:700;color:var(--shu);letter-spacing:.18em;
+    font-size:14px;margin:10px 0 14px;display:flex;align-items:center;gap:10px;
+  }
+  .eatery-head::before{content:"";width:18px;height:1px;background:var(--shu)}
+  .eateries{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .eatery{background:var(--sugi);color:#f1ead9;padding:18px 16px;border-radius:3px;position:relative;overflow:hidden}
+  .eatery .n{font-family:var(--latin);font-style:italic;font-size:30px;color:var(--kin-light);line-height:1;opacity:.85}
+  .eatery h5{font-family:var(--mincho);font-weight:700;font-size:16px;margin:8px 0 7px;letter-spacing:.04em;color:#fff}
+  .eatery p{margin:0;font-size:12.5px;line-height:1.8;color:#cdd6c5}
 
-    #reset-btn { width: 100%; margin-top: 20px; padding: 14px; background: transparent; border: 1px solid rgba(255,68,68,0.27); border-radius: 10px; color: #ff6666; font-size: 13px; cursor: pointer; font-family: 'Noto Sans JP'; }
+  /* 区切りの一文 */
+  .interlude{
+    text-align:center;font-family:var(--mincho);font-weight:600;
+    font-size:clamp(17px,3vw,21px);color:var(--matsu);letter-spacing:.1em;
+    margin:30px auto 6px;max-width:720px;line-height:1.9;text-wrap:balance;
+  }
+  .interlude::before,.interlude::after{content:"〜";color:var(--kin);margin:0 .55em;font-weight:500}
 
-    /* Log */
-    #log-title { font-size: 13px; color: #888; margin-bottom: 12px; }
-    .log-item { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-    .log-item.eat-log { border-color: rgba(255,140,0,0.3); }
-    .log-badge { font-family: 'Bebas Neue'; font-size: 22px; min-width: 64px; }
-    .log-badge.run { color: #ffd700; }
-    .log-badge.eat { color: #ff8c00; }
-    .log-detail { font-size: 12px; color: #666; margin-top: 2px; }
-    .log-num { font-size: 11px; color: #444; margin-left: auto; flex-shrink: 0; }
-    .log-del { background: transparent; border: none; color: #444; font-size: 18px; cursor: pointer; padding: 0 4px; flex-shrink: 0; }
-    .log-del:active { color: #ff4444; }
-    #empty-log { text-align: center; color: #444; padding: 40px; border: 1px dashed #222; border-radius: 12px; }
+  /* ============ ワンポイント ============ */
+  .tips{padding:64px 0 30px}
+  .tips .head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+  .tips .head h2{font-family:var(--mincho);font-weight:800;font-size:clamp(26px,5vw,36px);margin:0;color:var(--sugi);letter-spacing:.06em}
+  .tips .head .en{font-family:var(--latin);font-style:italic;color:var(--kin);font-size:18px}
+  .tip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+  .tip{border-top:2px solid var(--kin);padding-top:16px}
+  .tip .k{font-family:var(--latin);font-weight:600;color:var(--kin);font-size:15px;letter-spacing:.16em;margin-bottom:8px}
+  .tip h3{font-family:var(--mincho);font-weight:700;font-size:17px;margin:0 0 8px;color:#28311f}
+  .tip p{margin:0;font-size:13.5px;line-height:1.85;color:#3c453a}
 
-    /* Toast */
-    #toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); padding: 12px 24px; border-radius: 99px; font-size: 14px; font-weight: 700; z-index: 100; white-space: nowrap; box-shadow: 0 4px 20px rgba(0,0,0,0.4); display: none; animation: slideIn 0.3s ease; font-family: 'Noto Sans JP'; }
+  /* ============ フッター ============ */
+  footer{background:var(--sugi);color:#e9e1cf;margin-top:60px;padding:54px 0 46px;text-align:center}
+  footer .torii{font-family:var(--mincho);font-size:30px;color:var(--shu-soft);letter-spacing:.4em;margin-bottom:14px}
+  footer .msg{font-family:var(--mincho);font-weight:600;font-size:clamp(18px,3.4vw,24px);letter-spacing:.14em;margin:0 0 10px;color:#fff}
+  footer .sub{font-size:13px;letter-spacing:.2em;color:#b9c4ad;margin:0}
+  footer .en{font-family:var(--latin);font-style:italic;color:var(--kin-light);letter-spacing:.1em;margin-top:18px;font-size:15px}
 
-    @keyframes slideIn { from{transform:translate(-50%,-20px);opacity:0} to{transform:translate(-50%,0);opacity:1} }
+  /* スクロール演出 */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
 
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
-    input::placeholder { color: #444; }
-  </style>
+  /* ============ レスポンシブ ============ */
+  @media (max-width:760px){
+    .overview .grid{grid-template-columns:1fr;gap:30px}
+    .routes{grid-template-columns:1fr}
+    .eateries{grid-template-columns:1fr}
+    .tip-grid{grid-template-columns:1fr}
+    .tl-row{grid-template-columns:62px 1fr;gap:14px;padding-bottom:28px}
+    .tl-time{font-size:16px}
+    .tl-main{padding-left:22px}
+    .tl-main h3{font-size:18px}
+    .cover{min-height:88vh}
+    .day-vtitle{font-size:clamp(28px,9vw,40px)}
+  }
+
+  /* ===== スマホ：左インデントを詰めて、横幅をしっかり使う ===== */
+  @media (max-width:560px){
+    .wrap{padding:0 16px}
+    .cover-inner{padding-left:16px;padding-right:16px}
+
+    /* タイムライン：左に1本の線、点は「時刻」の行に揃える */
+    .timeline{margin-top:30px}
+    .tl-row{display:block;grid-template-columns:none;gap:0;
+            position:relative;padding:0 0 26px 26px;
+            border-left:1px solid var(--line)}
+    .tl-row:last-child{border-left-color:transparent;padding-bottom:6px}
+    .tl-time{position:relative;text-align:left;font-size:14px;font-weight:700;
+             color:var(--sugi);letter-spacing:.06em;padding-top:0;margin-bottom:6px}
+    .day3 .tl-time{color:var(--umi)}
+    .tl-time::before{content:"";position:absolute;left:-32px;top:.62em;
+             width:11px;height:11px;border-radius:50%;
+             background:var(--washi);border:2px solid var(--shu);transform:translateY(-50%)}
+    .day3 .tl-time::before{border-color:var(--umi)}
+    .tl-main{padding-left:0;border-left:0}
+    .tl-main::before{display:none}
+    .tl-main h3{font-size:16px;margin-bottom:7px;letter-spacing:.02em}
+    .tl-main p{font-size:14px}
+
+    /* ルート/お店カードの行頭インデントも軽めに */
+    .route{padding:16px 14px 14px}
+    .route li{padding-left:14px}
+    .eatery{padding:16px 14px}
+
+    /* ドロップキャップは控えめにして回り込みの崩れを防ぐ */
+    .overview{padding-top:56px}
+    .lead .drop{font-size:2.6em;margin:.06em .12em 0 0}
+
+    .day-band{height:clamp(280px,66vw,360px)}
+    .day-vtitle{font-size:clamp(26px,8.6vw,34px)}
+    .interlude{margin:24px auto 4px;font-size:15px;letter-spacing:.02em}
+    .interlude::before,.interlude::after{margin:0 .35em}
+    .kfacts{grid-template-columns:1fr}
+    .kbody p{font-size:15px;line-height:2}
+    .khero{padding:96px 0 40px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto !important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .ph img{transition:opacity .5s ease}
+  }
+  @media print{
+    .reveal{opacity:1;transform:none}
+    .cover{min-height:auto}
+    body{background:#fff}
+  }
+  /* ============ ページ切替・メニュー ============ */
+  .page[hidden]{display:none}
+  .menu-btn{position:fixed;top:14px;right:14px;z-index:55;display:inline-flex;align-items:center;gap:7px;
+    font-family:var(--mincho);font-weight:700;font-size:12.5px;letter-spacing:.16em;color:#f4efe3;
+    background:rgba(22,49,40,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    border:1px solid rgba(205,171,99,.55);border-radius:999px;padding:9px 15px;cursor:pointer}
+  .menu-btn:hover{background:var(--sugi)}
+  .menu-btn .ic{font-size:14px;line-height:1}
+  .menu-overlay{position:fixed;inset:0;z-index:60;background:rgba(15,32,25,.975);
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    opacity:0;visibility:hidden;transition:opacity .32s ease;padding:48px 24px}
+  .menu-overlay.open{opacity:1;visibility:visible}
+  .menu-overlay .mclose{position:absolute;top:14px;right:16px;width:44px;height:44px;border:none;
+    background:none;color:#f4efe3;font-size:28px;cursor:pointer;line-height:1}
+  .menu-overlay .mlabel{font-family:var(--latin);font-style:italic;color:var(--kin-light);
+    letter-spacing:.34em;font-size:13px;margin-bottom:20px}
+  .menu-overlay a{font-family:var(--mincho);font-weight:700;color:#f4efe3;font-size:clamp(19px,5.2vw,24px);
+    letter-spacing:.16em;text-decoration:none;padding:10px 0;text-align:center;transition:color .2s}
+  .menu-overlay a:hover{color:var(--kin-light)}
+  .menu-overlay a .en2{display:block;font-family:var(--latin);font-style:italic;font-weight:500;
+    font-size:11px;color:var(--kin-light);letter-spacing:.12em;margin-top:3px}
+  .menu-overlay .msep{width:44px;height:1px;background:rgba(205,171,99,.4);margin:14px 0}
+  .menu-overlay a.feature{color:var(--kin-light)}
+
+  /* ============ 三重・伊勢の話ページ ============ */
+  .khero{background:linear-gradient(160deg,var(--sugi),#0f241b);color:#f1ead9;
+    padding:104px 0 46px;text-align:center;position:relative;overflow:hidden}
+  .khero::after{content:"⛩";position:absolute;right:-6px;bottom:-30px;font-size:150px;
+    color:rgba(205,171,99,.08);font-family:var(--mincho);line-height:1}
+  .khero .eyebrow{font-family:var(--latin);letter-spacing:.5em;text-transform:uppercase;
+    color:var(--kin-light);font-size:12.5px;margin:0 0 14px;position:relative}
+  .khero h1{font-family:var(--mincho);font-weight:800;font-size:clamp(32px,8vw,54px);margin:0;
+    letter-spacing:.08em;position:relative}
+  .khero .lead{margin:16px auto 0;max-width:560px;font-size:14px;color:#cdd6c5;line-height:1.9;position:relative}
+  .ksection{padding:50px 0 6px}
+  .ksection .khead{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+  .ksection .khead h2{font-family:var(--mincho);font-weight:800;font-size:clamp(23px,5vw,31px);
+    margin:0;color:var(--sugi);letter-spacing:.06em}
+  .ksection .khead .en{font-family:var(--latin);font-style:italic;color:var(--kin);font-size:16px}
+  .kbody p{font-family:var(--mincho);font-weight:500;font-size:16px;line-height:2.05;color:#2c352a;margin:0 0 16px}
+  .kbody p .em{color:var(--sugi);font-weight:700}
+  .kcallout{background:var(--sugi);color:#f1ead9;border-radius:4px;padding:22px 20px;margin:6px 0 6px}
+  .kcallout h3{font-family:var(--mincho);font-weight:700;font-size:17px;margin:0 0 9px;color:#fff;letter-spacing:.05em}
+  .kcallout h3 .yr{font-family:var(--latin);font-style:italic;color:var(--kin-light);margin-left:8px;font-size:.92em}
+  .kcallout p{margin:0;font-size:13.5px;line-height:1.9;color:#d3dccb}
+  .kfacts{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 16px;margin-top:4px}
+  .kcard{border-top:2px solid var(--kin);padding:15px 0 4px}
+  .kcard .ic{font-size:21px;line-height:1}
+  .kcard h3{font-family:var(--mincho);font-weight:700;font-size:15.5px;margin:8px 0 7px;color:#28311f;letter-spacing:.03em}
+  .kcard p{margin:0;font-size:12.5px;line-height:1.85;color:#3c453a}
+  .ksteps{border-top:2px solid var(--sugi);margin-top:4px}
+  .kstep{display:grid;grid-template-columns:auto 1fr;gap:15px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .kstep .no{font-family:var(--latin);font-weight:600;font-size:19px;color:var(--kin);line-height:1.3}
+  .kstep h3{font-family:var(--mincho);font-weight:700;font-size:15px;margin:0 0 4px;color:#28311f}
+  .kstep p{margin:0;font-size:12.5px;line-height:1.8;color:#3c453a}
+  .kback{text-align:center;padding:42px 0 0}
+  .kback a{display:inline-flex;align-items:center;gap:8px;font-family:var(--mincho);font-weight:700;
+    font-size:14px;letter-spacing:.1em;color:var(--sugi);text-decoration:none;border:1px solid var(--sugi);
+    border-radius:999px;padding:11px 24px;transition:background .2s,color .2s}
+  .kback a:hover{background:var(--sugi);color:#f1ead9}
+
+</style>
 </head>
 <body>
 
-<div id="header">
-  <h1>RUN & EAT</h1>
-  <p>走った分だけ食べていい</p>
-</div>
+<!-- ============ メニュー ============ -->
+<nav>
+  <button id="menuBtn" class="menu-btn" aria-label="メニューを開く"><span class="ic">☰</span>メニュー</button>
+  <div id="menuOverlay" class="menu-overlay" role="dialog" aria-modal="true" aria-label="メニュー">
+    <button class="mclose" id="menuClose" aria-label="閉じる">×</button>
+    <div class="mlabel">Menu</div>
+    <a href="#" data-nav data-page="page-shiori">表紙へ<span class="en2">Top</span></a>
+    <a href="#" data-nav data-page="page-shiori" data-anchor="day1">1日目 ｜ 神都へ参る<span class="en2">Day 01</span></a>
+    <a href="#" data-nav data-page="page-shiori" data-anchor="day2">2日目 ｜ 祈りと賑わい<span class="en2">Day 02</span></a>
+    <a href="#" data-nav data-page="page-shiori" data-anchor="day3">3日目 ｜ 海をめぐる<span class="en2">Day 03</span></a>
+    <a href="#" data-nav data-page="page-shiori" data-anchor="tips">旅のワンポイント<span class="en2">Travel Tips</span></a>
+    <div class="msep"></div>
+    <a href="#" data-nav data-page="page-knowledge" class="feature">三重・伊勢の話<span class="en2">History &amp; Trivia</span></a>
+  </div>
+</nav>
 
-<div id="main">
-  <!-- Point Card -->
-  <div id="pt-card">
-    <div class="pt-row">
-      <div class="pt-box">
-        <div class="pt-label">🏃 獲得ポイント</div>
-        <div><span id="pt-earned" class="pt-num">0</span><span class="pt-unit"> pt</span></div>
-      </div>
-      <div class="divider"></div>
-      <div class="pt-box">
-        <div class="pt-label">🍽️ 消費ポイント</div>
-        <div><span id="pt-spent" class="pt-num spent">0</span><span class="pt-unit"> pt</span></div>
-      </div>
-      <div class="divider"></div>
-      <div class="pt-box">
-        <div class="pt-label">✨ 残りポイント</div>
-        <div><span id="pt-remain" class="pt-num remain">0</span><span class="pt-unit"> pt</span></div>
+<main id="page-shiori" class="page">
+
+<!-- ============ 表紙 ============ -->
+<header class="cover">
+  <div class="ph" data-slideshow>
+    <img alt="伊勢神宮 内宮 宇治橋の大鳥居" loading="eager" style="object-position:50% 20%"
+         src="https://commons.wikimedia.org/wiki/Special:FilePath/Ise-Shrine_Naiku-Ujibashi-Torii.jpg?width=1600">
+    <img alt="伊勢神宮 内宮の杜" loading="lazy" style="object-position:50% 42%"
+         data-src="https://commons.wikimedia.org/wiki/Special:FilePath/Naiku_Ise-jingu_Grand_Shrine_01.JPG?width=1600">
+  </div>
+  <div class="cover-inner">
+    <div class="max">
+      <p class="eyebrow">Mie &middot; Ise &middot; Toba</p>
+      <h1>伊勢・鳥羽<small>美食と参拝、海をめぐる2泊3日</small></h1>
+      <div class="meta">
+        <span class="date">6.27 — 6.29</span>
+        <span class="dot"></span>
+        <span class="tag">2泊3日 旅のしおり</span>
+        <span class="dot"></span>
+        <span class="tag">福岡 ⇔ 中部国際空港</span>
       </div>
     </div>
   </div>
+</header>
 
-  <div id="tabs">
-    <button class="tab-btn active" onclick="switchTab('run')">🏃 記録</button>
-    <button class="tab-btn" onclick="switchTab('food')">🍽️ 食べる</button>
-    <button class="tab-btn" onclick="switchTab('log')">📋 履歴</button>
+<!-- ============ 概要 ============ -->
+<section class="overview">
+  <div class="wrap">
+    <p class="lead-eyebrow reveal">ようこそ、神都へ</p>
+    <div class="grid">
+      <p class="lead reveal">
+        <span class="drop">お</span>伊勢さんへ、いざ。二千年の杜に抱かれた伊勢神宮、檜の香り立つおはらい町の賑わい、とろける松阪牛、そして日本一の鳥羽水族館。海と祈りと美食が一度に味わえる、贅沢な三日間のはじまりです。当日の天候や運航にあわせて二つのルートを用意した、安心の旅程をどうぞ。
+      </p>
+      <div class="spec reveal">
+        <dl>
+          <dt>日程</dt><dd>6月27日 〜 6月29日（2泊3日）</dd>
+          <dt>移動</dt><dd>飛行機（福岡⇔中部国際空港）／高速船「津エアポートライン」／近鉄・JR・路線バス</dd>
+          <dt>宿泊</dt><dd>1日目：コンフォートホテル伊勢（伊勢市駅前）<br>2日目：鳥羽国際ホテル（温泉・海の幸）</dd>
+          <dt>便利</dt><dd>近鉄の観光パス「まわりゃんせ」が往復特急・現地バス・水族館入場までカバー</dd>
+        </dl>
+      </div>
+    </div>
   </div>
+</section>
 
-  <!-- Run Panel -->
-  <div id="panel-run" class="panel active">
-    <div class="card">
-      <div class="card-title">走った距離を入力（1km = 1pt）</div>
-      <div id="run-row">
-        <div id="run-wrap">
-          <input id="run-input" type="number" inputmode="decimal" placeholder="0.0" min="0" step="0.1" />
-          <span id="run-km-label">KM</span>
+<!-- ============ 1日目 ============ -->
+<section class="day day1" id="day1">
+  <div class="wrap">
+    <div class="day-band reveal">
+      <div class="ph" data-slideshow>
+        <img alt="伊勢神宮 外宮" loading="lazy" style="object-position:50% 42%" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ise-jingu_Grand_Shrine_Geku_Maine_sanctuary._May,_2015.jpg?width=1200">
+        <img alt="外宮参道" loading="lazy" style="object-position:50% 48%" data-src="https://commons.wikimedia.org/wiki/Special:FilePath/Geku-Sando_Street_20190130-1.jpg?width=1200">
+      </div>
+      <div class="day-title">
+        <div class="day-no">
+          <span class="lat">Day</span>
+          <span class="rule"></span>
+          <span class="date">01</span>
         </div>
-        <button id="run-btn" onclick="addRun()">＋</button>
+        <div class="day-vtitle">神都へ参る</div>
+        <div class="day-vsub">福岡から伊勢へ</div>
       </div>
+      <span class="day-badge">6 / 27 (金)</span>
     </div>
-  </div>
 
-  <!-- Food Panel -->
-  <div id="panel-food" class="panel">
-    <div class="card">
-      <div class="card-title gold">＋ 食べ物を追加</div>
-      <div class="form-row">
-        <input id="emoji-input" type="text" placeholder="🍔" maxlength="2" />
-        <input id="food-input" class="text-input" type="text" placeholder="食べ物の名前" />
-      </div>
-      <div class="form-row">
-        <div class="num-wrap">
-          <input id="cost-input" class="num-input" type="number" inputmode="decimal" placeholder="必要pt" min="1" step="1" />
-          <span class="num-unit">pt</span>
+    <div class="timeline">
+      <div class="tl-row reveal">
+        <div class="tl-time">07:55</div>
+        <div class="tl-main">
+          <h3><span class="pin">✈</span>福岡 ⇒ セントレア着</h3>
+          <p>福岡空港7:55発 → 中部国際空港（セントレア）9:20着。到着後、飛行機の遅延や荷物の受け取り状況にあわせて、下の2ルートから当日のベストを選びます。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=中部国際空港セントレア" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
         </div>
-        <button class="add-btn" onclick="addFood()">追加</button>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">09:30</div>
+        <div class="tl-main">
+          <h3><span class="pin">⌖</span>当日のルートを選択</h3>
+          <div class="routes">
+            <div class="route a">
+              <div class="lbl"><b>A</b>通常ルート（高速船）</div>
+              <h4>10:00発の船に間に合う場合</h4>
+              <ul>
+                <li><b>10:00–10:45</b>　高速船で「津なぎさまち」へ</li>
+                <li><b>10:45–12:00</b>　連絡バス＋近鉄/JR特急で「伊勢市駅」へ</li>
+                <li><b>12:30–14:30</b>　外宮参道でランチ＆外宮参拝</li>
+              </ul>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=津なぎさまち" target="_blank" rel="noopener">津なぎさまち <span class="ar">↗</span></a>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=伊勢神宮外宮" target="_blank" rel="noopener">外宮 <span class="ar">↗</span></a>
+            </div>
+            <div class="route b">
+              <div class="lbl"><b>B</b>名古屋めしルート</div>
+              <h4>船に乗り遅れた／名古屋を楽しむ場合</h4>
+              <ul>
+                <li><b>09:45–10:15</b>　ミュースカイで「名古屋駅」へ（約28分）</li>
+                <li><b>10:30–12:00</b>　エスカ地下街で名古屋めしランチ</li>
+                <li><b>12:15–13:40</b>　近鉄特急で「伊勢市駅」へ</li>
+                <li><b>14:00–15:30</b>　荷物を預けて外宮参拝</li>
+              </ul>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=エスカ%20名古屋" target="_blank" rel="noopener">エスカ <span class="ar">↗</span></a>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=伊勢神宮外宮" target="_blank" rel="noopener">外宮 <span class="ar">↗</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">15:30</div>
+        <div class="tl-main">
+          <h3><span class="pin">⌂</span>ホテルにチェックイン</h3>
+          <p>A・B共通。コンフォートホテル伊勢へ。参拝の疲れを癒やし、夜の松阪牛に向けてひと休み。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=コンフォートホテル伊勢" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">18:30</div>
+        <div class="tl-main">
+          <h3><span class="pin">★</span>極上・松阪牛ディナー</h3>
+          <p>伊勢市駅周辺で、三大和牛のひとつ松阪牛を堪能。気分にあわせて選べる厳選3店。</p>
+          <div class="eatery-head">厳選おすすめ店</div>
+          <div class="eateries">
+            <div class="eatery">
+              <div class="n">i</div>
+              <h5>ステーキの石かわ 伊勢店</h5>
+              <p>ホテル1F。落ち着いた空間で松阪牛ステーキコースを。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ステーキの石かわ%20伊勢店" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+            </div>
+            <div class="eatery">
+              <div class="n">ii</div>
+              <h5>豚捨 外宮前店</h5>
+              <p>徒歩5分。老舗精肉店直営のすき焼き・あみ焼き・牛鍋。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=豚捨%20外宮前店" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+            </div>
+            <div class="eatery">
+              <div class="n">iii</div>
+              <h5>牛串焼き 新羅</h5>
+              <p>駅前商店街。1本単位で気軽につまめる串焼きの名店。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=牛串焼き%20新羅%20伊勢" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="food-list"></div>
-    <button id="reset-btn" onclick="resetData()">🔄 データをリセット</button>
   </div>
+</section>
 
-  <!-- Log Panel -->
-  <div id="panel-log" class="panel">
-    <div id="log-title">履歴（タップで削除）</div>
-    <div id="log-list"></div>
+<p class="interlude reveal">横丁の香りに誘われて、内宮の杜へ</p>
+
+<!-- ============ 2日目 ============ -->
+<section class="day day2" id="day2">
+  <div class="wrap">
+    <div class="day-band reveal">
+      <div class="ph" data-slideshow>
+        <img alt="おはらい町の街並み" loading="lazy" style="object-position:50% 42%" src="https://commons.wikimedia.org/wiki/Special:FilePath/View_near_Oharaimachi-dori_Street_2.jpg?width=1200">
+        <img alt="おかげ横丁の街並み" loading="lazy" style="object-position:50% 42%" data-src="https://commons.wikimedia.org/wiki/Special:FilePath/JP-Mie-Ise-Grand-Shrine-Okage-Yokocho.JPG?width=1200">
+        <img alt="赤福餅" loading="lazy" style="object-position:50% 52%" data-src="https://commons.wikimedia.org/wiki/Special:FilePath/Akafuku_mochi_by_hirotomo_in_Ise,_Mie.jpg?width=1100">
+      </div>
+      <div class="day-title">
+        <div class="day-no">
+          <span class="lat">Day</span>
+          <span class="rule"></span>
+          <span class="date">02</span>
+        </div>
+        <div class="day-vtitle">祈りと賑わい</div>
+        <div class="day-vsub">横丁の美食と内宮</div>
+      </div>
+      <span class="day-badge">6 / 28 (土)</span>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-row reveal">
+        <div class="tl-time">〜10:00</div>
+        <div class="tl-main">
+          <h3><span class="pin">⌂</span>ホテルをチェックアウト</h3>
+          <p>コンフォートホテル伊勢をチェックアウト後、伊勢市駅前のバス乗り場から「内宮」行きへ乗車（約20分）。</p>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">10:30</div>
+        <div class="tl-main">
+          <h3><span class="pin">❖</span>おかげ横丁を散策＆ランチ</h3>
+          <p>おはらい町〜おかげ横丁の情緒あふれる街並みを散策。伊勢うどんや手こね寿司などの名物ランチを楽しみ、お土産選びや赤福餅の食べ歩きを満喫します。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=おかげ横丁" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">13:00</div>
+        <div class="tl-main">
+          <h3><span class="pin">⛩</span>伊勢神宮・内宮を参拝</h3>
+          <p>「ないくう」と読みます。五十鈴川にかかる宇治橋を渡り、天照大御神をお祀りする正宮へ。お伊勢参りの神髄を感じる、厳かな時間をお過ごしください。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=伊勢神宮内宮" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">15:00</div>
+        <div class="tl-main">
+          <h3><span class="pin">➜</span>内宮から鳥羽へ移動</h3>
+          <p>内宮前から臨時バス、または伊勢市駅へ戻り近鉄線で「鳥羽駅」へ（約15分）。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=鳥羽駅" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">15:30</div>
+        <div class="tl-main">
+          <h3><span class="pin">♨</span>鳥羽国際ホテルへ</h3>
+          <p>鳥羽湾を望む高台のホテルへチェックイン。温泉で旅の疲れを癒やし、夜は伊勢志摩の贅沢な海の幸ディナーを堪能。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=鳥羽国際ホテル" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<div id="toast"></div>
+<p class="interlude reveal">最終日は、海の生きものたちに会いに</p>
+
+<!-- ============ 3日目 ============ -->
+<section class="day day3" id="day3">
+  <div class="wrap">
+    <div class="day-band reveal">
+      <div class="ph" data-slideshow>
+        <img alt="鳥羽水族館の生きもの" loading="lazy" style="object-position:50% 30%" src="https://commons.wikimedia.org/wiki/Special:FilePath/Fur_seal,_Toba_Aquarium.jpg?width=1200">
+        <img alt="鳥羽湾の眺め" loading="lazy" style="object-position:50% 50%" data-src="https://commons.wikimedia.org/wiki/Special:FilePath/Sakate_Island_from_Toba_Castle.JPG?width=1200">
+      </div>
+      <div class="day-title">
+        <div class="day-no">
+          <span class="lat">Day</span>
+          <span class="rule"></span>
+          <span class="date">03</span>
+        </div>
+        <div class="day-vtitle">海をめぐる</div>
+        <div class="day-vsub">水族館と名古屋めし</div>
+      </div>
+      <span class="day-badge">6 / 29 (日)</span>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-row reveal">
+        <div class="tl-time">〜11:00</div>
+        <div class="tl-main">
+          <h3><span class="pin">⌂</span>ホテルチェックアウト</h3>
+          <p>朝の海を眺めながら、ゆっくり朝食をとってチェックアウト。</p>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">11:15</div>
+        <div class="tl-main">
+          <h3><span class="pin">🐟</span>鳥羽水族館 満喫＆ランチ</h3>
+          <p>飼育種類数“日本一”を誇る水族館。ジュゴンや可愛いラッコ、アシカショーを楽しみ、館内または周辺でランチ。16:00発の高速船に合わせ、14:00頃に鳥羽を出発します（滞在 約2.5〜3時間）。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=鳥羽水族館" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">14:00</div>
+        <div class="tl-main">
+          <h3><span class="pin">➜</span>鳥羽 → 津なぎさまち</h3>
+          <p>高速船のりば（津なぎさまち）へ。鳥羽駅から近鉄特急で「津駅」へ（乗換あり・約1時間10分）、津駅から路線バスで約12分。出航10分前までに乗船手続きを。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=津なぎさまち" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">16:00</div>
+        <div class="tl-main">
+          <h3><span class="pin">⛵</span>高速船でセントレアへ</h3>
+          <p>津エアポートライン。津なぎさまち16:00発 → 中部国際空港16:45着（所要 約45分）。片道 大人2,980円・要予約。※国内線は接続に約1時間の余裕が目安。次の18:00発便は19:35のフライトに間に合いません。天候により欠航する場合があるため、最新の時刻表をご確認ください。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=中部国際空港高速船ターミナル" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">16:45</div>
+        <div class="tl-main">
+          <h3><span class="pin">🍴</span>セントレアで名古屋めし</h3>
+          <p>フライトまでの時間、お土産選びや「矢場とん」「世界の山ちゃん」などで最後の名古屋めしディナーを。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=中部国際空港セントレア" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">19:35</div>
+        <div class="tl-main">
+          <h3><span class="pin">✈</span>中部国際空港 ⇒ 福岡空港</h3>
+          <p>21:05、福岡着。楽しい思い出とともに帰着。お疲れさまでした。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ワンポイント ============ -->
+<section class="tips" id="tips">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>旅のワンポイント</h2>
+      <span class="en">Travel Tips</span>
+    </div>
+    <div class="tip-grid">
+      <div class="tip reveal">
+        <div class="k">01</div>
+        <h3>名古屋駅のランチは「エスカ」へ</h3>
+        <p>新幹線側の地下街エスカ（ESCA）は近鉄改札からも近く、ひつまぶし・味噌カツ・きしめん・手羽先の名店が密集。短時間でサクッと名物を。</p>
+      </div>
+      <div class="tip reveal">
+        <div class="k">02</div>
+        <h3>外宮は15:30までに</h3>
+        <p>門は夕方（時期により17:00〜18:00頃）まで開いていますが、お守りや御朱印は夕方前に終了することが多め。名古屋経由でも15:30頃には外宮へ。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ フッター ============ -->
+<footer>
+  <div class="wrap">
+    <div class="torii">⛩</div>
+    <p class="msg">よき旅を、お伊勢さんへ</p>
+    <p class="sub">三重・伊勢鳥羽 2泊3日</p>
+    <p class="en">Have a wonderful journey.</p>
+  </div>
+</footer>
+
+</main><!-- /page-shiori -->
+
+<!-- ============ 三重・伊勢の話（別ページ） ============ -->
+<main id="page-knowledge" class="page" hidden>
+  <header class="khero">
+    <div class="wrap">
+      <p class="eyebrow">History &amp; Trivia</p>
+      <h1>三重・伊勢の話</h1>
+      <p class="lead">旅がもっと味わい深くなる、伊勢神宮の歴史と、三重・伊勢志摩の豆知識。お参りの作法も少しだけ。</p>
+    </div>
+  </header>
+
+  <section class="ksection">
+    <div class="wrap">
+      <div class="khead reveal"><h2>伊勢神宮の歴史</h2><span class="en">Ise Jingu</span></div>
+      <div class="kbody reveal">
+        <p>伊勢神宮は、正式には単に「<span class="em">神宮</span>」と呼ばれます。じつは一つの社ではなく、<span class="em">内宮（ないくう）・外宮（げくう）を中心とする125の宮社の総称</span>。その頂点が、皇室の御祖神（みおやがみ）である天照大御神（あまてらすおおみかみ）をお祀りする内宮です。</p>
+        <p>内宮は今からおよそ<span class="em">2000年前</span>、天照大御神の鎮まる地を求めた倭姫命（やまとひめのみこと）が、五十鈴川のほとりに創建したと伝えられます。約500年後には、お食事を司る豊受大御神（とようけのおおみかみ）が丹波国から迎えられ、外宮が建てられました。以来「<span class="em">外宮先祭</span>」といって、お祭りも参拝も外宮から先に行うのが古来のならわしです。</p>
+        <p>そして神宮を語るうえで欠かせないのが、20年に一度すべてを新しくする式年遷宮です。</p>
+      </div>
+      <div class="kcallout reveal">
+        <h3>式年遷宮（しきねんせんぐう）<span class="yr">next 2033</span></h3>
+        <p>20年に一度、社殿はもちろん、鳥居や橋、神様に捧げる装束・宝物にいたるまで、すべてを古式のままに新しく造り替え、大御神に新しいお宮へお遷りいただく、日本最大級のお祭りです。第1回は飛鳥時代の690年。1300年にわたり繰り返され、直近の第62回は2013年に斎行。次回の第63回は2033年に向けて、すでに2025年から諸祭が始まっています。常に瑞々しい社殿を保ちながら、技と祈りを次代へ受け継ぐ「常若（とこわか）」の思想が込められています。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ksection">
+    <div class="wrap">
+      <div class="khead reveal"><h2>三重・伊勢志摩の豆知識</h2><span class="en">Trivia</span></div>
+      <div class="kfacts">
+        <div class="kcard reveal">
+          <div class="ic">🐚</div>
+          <h3>海女文化のふるさと</h3>
+          <p>鳥羽・志摩は日本有数の海女の里。素潜りで貝や海藻を獲る海女漁は、いまや世界でも日本と韓国にしか残らないといわれる貴重な文化です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">◍</div>
+          <h3>真珠養殖の発祥地</h3>
+          <p>御木本幸吉が英虞湾で、世界で初めて真珠の養殖に成功したのが1893年。ミキモト真珠島は、その真珠養殖発祥の地です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🥩</div>
+          <h3>松阪牛</h3>
+          <p>きめ細やかな霜降りととろける甘みで知られる、日本を代表する高級和牛。神戸牛・近江牛と並ぶ「日本三大和牛」のひとつです。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍜</div>
+          <h3>伊勢うどん・手こね寿司</h3>
+          <p>伊勢うどんは、極太でやわらかな麺にたまり醤油の濃いタレをからめた一杯。手こね寿司は、カツオを醤油に漬けた漁師めしが起源です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🍡</div>
+          <h3>赤福は300年以上</h3>
+          <p>おはらい町の名物・赤福餅の創業は1707年（宝永4年）。五十鈴川の清流をかたどったと伝わる、こし餡ともちの素朴な銘菓です。</p>
+        </div>
+        <div class="kcard reveal">
+          <div class="ic">🌀</div>
+          <h3>「三重」の名の由来</h3>
+          <p>日本武尊（やまとたけるのみこと）が東征の帰路、この地で「わが足、三重に曲がるほど疲れた」と嘆いたという古い伝説に由来するといわれます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ksection">
+    <div class="wrap">
+      <div class="khead reveal"><h2>お参りのいろは</h2><span class="en">Etiquette</span></div>
+      <div class="ksteps reveal">
+        <div class="kstep">
+          <div class="no">壱</div>
+          <div>
+            <h3>外宮から、内宮へ</h3>
+            <p>古来のならわしにならい、外宮を先に、続いて内宮を参拝するのが正式とされます。</p>
+          </div>
+        </div>
+        <div class="kstep">
+          <div class="no">弐</div>
+          <div>
+            <h3>参道は端を歩く</h3>
+            <p>参道の中央は神様の通り道。外宮は左側、内宮は右側を歩くのがならわしです。手水舎で手と口を清めてから進みます。</p>
+          </div>
+        </div>
+        <div class="kstep">
+          <div class="no">参</div>
+          <div>
+            <h3>二拝二拍手一拝</h3>
+            <p>正宮では、深く二度おじぎ→二度かしわ手→もう一度深くおじぎ。まずは日々の感謝を伝えるのが伊勢流といわれます。</p>
+          </div>
+        </div>
+        <div class="kstep">
+          <div class="no">四</div>
+          <div>
+            <h3>橋を渡れば、聖域へ</h3>
+            <p>内宮の宇治橋、外宮の表参道火除橋は、日常と神域を分ける境。渡る前に一礼して、清々しい気持ちでお参りを。</p>
+          </div>
+        </div>
+      </div>
+      <div class="kback reveal">
+        <a href="#" data-nav data-page="page-shiori">← 旅のしおりへ戻る</a>
+      </div>
+    </div>
+  </section>
+</main><!-- /page-knowledge -->
 
 <script>
-  const STORAGE_KEY = 'run-eat-v2';
-  const DEFAULT_FOODS = [
-    { id: 1, emoji: '🍜', name: 'ラーメン', cost: 5 },
-    { id: 2, emoji: '🍕', name: 'ピザ',     cost: 10 },
-    { id: 3, emoji: '🥩', name: '焼肉',     cost: 21 },
-  ];
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  let state = {
-    foods: JSON.parse(JSON.stringify(DEFAULT_FOODS)),
-    logs: []  // { id, type:'run'|'eat', km?, foodId?, foodName?, foodEmoji?, cost?, pt, date, time }
-  };
+  // 軽量スライドショー：1枚目は通常読み込み、2枚目以降は表示直前に遅延読み込みしてクロスフェード
+  function initSlideshow(box){
+    var imgs = Array.prototype.slice.call(box.querySelectorAll('img'));
+    if(!imgs.length) return;
 
-  function load() {
-    try {
-      const s = localStorage.getItem(STORAGE_KEY);
-      if (s) state = JSON.parse(s);
-    } catch(e) {}
-  }
+    var first = imgs[0];
+    function showFirst(){ first.classList.add('show'); }
+    if(first.complete && first.naturalWidth){ showFirst(); }
+    first.addEventListener('load', showFirst);
+    first.addEventListener('error', function(){ first.classList.add('failed'); });
+    imgs.forEach(function(im){ im.addEventListener('error', function(){ im.classList.add('failed'); }); });
 
-  function save() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }
+    // 画像が1枚、または「動きを減らす」設定なら自動切り替えはしない
+    if(imgs.length < 2 || reduceMotion) return;
 
-  function calcPoints() {
-    let earned = 0, spent = 0;
-    state.logs.forEach(l => {
-      if (l.type === 'run') earned += l.pt;
-      if (l.type === 'eat') spent += l.pt;
+    function load(i){
+      var im = imgs[i];
+      if(im && !im.getAttribute('src') && im.dataset.src){ im.src = im.dataset.src; }
+    }
+
+    var idx = 0, timer = null, inView = false;
+    function next(){
+      var ni = (idx + 1) % imgs.length;
+      load(ni);
+      imgs[idx].classList.remove('show');
+      imgs[ni].classList.add('show');
+      idx = ni;
+      load((ni + 1) % imgs.length); // 次の次を先読み
+    }
+
+    function start(){
+      if(timer) return;
+      load(1);                 // 2枚目を裏で読み込み
+      timer = setInterval(next, 5200);
+    }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+
+    // 画面内にあるときだけ動かす（スクロールで外れたら停止して負荷を抑える）
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          inView = e.isIntersecting;
+          inView ? start() : stop();
+        });
+      }, { threshold: 0.25 });
+      io.observe(box);
+    } else {
+      inView = true; start();
+    }
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ stop(); } else if(inView){ start(); }
     });
-    return { earned: parseFloat(earned.toFixed(1)), spent: parseFloat(spent.toFixed(1)), remain: parseFloat((earned - spent).toFixed(1)) };
+  }
+  document.querySelectorAll('.ph[data-slideshow]').forEach(initSlideshow);
+
+  // スクロール演出
+  if(reduceMotion){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  } else if('IntersectionObserver' in window){
+    var io2 = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io2.unobserve(e.target);} });
+    },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io2.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+  // ===== メニュー & ページ切替 =====
+  var overlay = document.getElementById('menuOverlay');
+  function openMenu(){ overlay.classList.add('open'); }
+  function closeMenu(){ overlay.classList.remove('open'); }
+  var mb = document.getElementById('menuBtn');
+  var mc = document.getElementById('menuClose');
+  if(mb) mb.addEventListener('click', openMenu);
+  if(mc) mc.addEventListener('click', closeMenu);
+  if(overlay) overlay.addEventListener('click', function(e){ if(e.target === overlay) closeMenu(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+
+  function showPage(id){
+    document.querySelectorAll('.page').forEach(function(p){ p.hidden = (p.id !== id); });
+    var pg = document.getElementById(id);
+    if(pg){ pg.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }
   }
 
-  function render() {
-    const { earned, spent, remain } = calcPoints();
-    document.getElementById('pt-earned').textContent = earned;
-    document.getElementById('pt-spent').textContent  = spent;
-    document.getElementById('pt-remain').textContent = remain;
-    document.getElementById('pt-remain').style.color = remain < 0 ? '#ff6666' : '#7fff7f';
-
-    // Food list
-    document.getElementById('food-list').innerHTML = state.foods.map(f => {
-      const canEat = remain >= f.cost;
-      return `
-        <div class="food-item ${!canEat ? 'cant' : ''}">
-          <span style="font-size:28px">${f.emoji}</span>
-          <div class="food-info">
-            <div class="food-name">${f.name}</div>
-            <div class="food-cost">${f.cost} PT 必要</div>
-          </div>
-          <button class="eat-btn" onclick="eatFood(${f.id})" ${!canEat ? 'disabled' : ''}>食べた！</button>
-          <button class="del-btn" onclick="deleteFood(${f.id})">削除</button>
-        </div>`;
-    }).join('') || '<div style="text-align:center;color:#444;padding:30px;border:1px dashed #222;border-radius:12px;font-size:13px">食べ物を追加してください</div>';
-
-    // Log list
-    document.getElementById('log-list').innerHTML = state.logs.length === 0
-      ? `<div id="empty-log">まだ記録がありません</div>`
-      : state.logs.map((l, i) => {
-          const isRun = l.type === 'run';
-          return `
-            <div class="log-item ${isRun ? '' : 'eat-log'}">
-              <div>
-                <div class="log-badge ${isRun ? 'run' : 'eat'}">
-                  ${isRun ? `${l.km}<span style="font-size:13px;color:#666">km</span>` : `${l.foodEmoji} -${l.pt}<span style="font-size:13px;color:#666">pt</span>`}
-                </div>
-                <div class="log-detail">${isRun ? `+${l.pt}pt` : l.foodName} ・ ${l.date} ${l.time}</div>
-              </div>
-              <span class="log-num">#${state.logs.length - i}</span>
-              <button class="log-del" onclick="deleteLog(${l.id})" title="削除">✕</button>
-            </div>`;
-        }).join('');
-  }
-
-  function addRun() {
-    const val = parseFloat(document.getElementById('run-input').value);
-    if (!val || val <= 0) return showToast('正しい距離を入力してください', 'error');
-    const now = new Date();
-    state.logs.unshift({
-      id: Date.now(), type: 'run', km: val, pt: parseFloat(val.toFixed(1)),
-      date: now.toLocaleDateString('ja-JP'),
-      time: now.toLocaleTimeString('ja-JP', { hour:'2-digit', minute:'2-digit' })
+  document.querySelectorAll('[data-nav]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var page = a.getAttribute('data-page') || 'page-shiori';
+      var anchor = a.getAttribute('data-anchor');
+      showPage(page);
+      closeMenu();
+      requestAnimationFrame(function(){
+        if(anchor){
+          var t = document.getElementById(anchor);
+          if(t){ t.scrollIntoView({ behavior: 'auto', block: 'start' }); }
+        } else {
+          window.scrollTo(0, 0);
+        }
+      });
     });
-    document.getElementById('run-input').value = '';
-    save();
-    showToast(`✅ ${val}km → +${val}pt 獲得！`);
-    render();
-  }
-
-  function addFood() {
-    const cost = parseFloat(document.getElementById('cost-input').value);
-    const name = document.getElementById('food-input').value.trim();
-    const emoji = document.getElementById('emoji-input').value.trim() || '🍔';
-    if (!cost || !name) return showToast('名前と必要ptを入力してください', 'error');
-    state.foods.push({ id: Date.now(), emoji, name, cost });
-    document.getElementById('cost-input').value = '';
-    document.getElementById('food-input').value = '';
-    document.getElementById('emoji-input').value = '';
-    save();
-    showToast('食べ物を追加しました！');
-    render();
-  }
-
-  function eatFood(id) {
-    const food = state.foods.find(f => f.id === id);
-    if (!food) return;
-    const { remain } = calcPoints();
-    if (remain < food.cost) return showToast('ポイントが足りません！', 'error');
-    const now = new Date();
-    state.logs.unshift({
-      id: Date.now(), type: 'eat', foodId: id, foodName: food.name, foodEmoji: food.emoji, pt: food.cost,
-      date: now.toLocaleDateString('ja-JP'),
-      time: now.toLocaleTimeString('ja-JP', { hour:'2-digit', minute:'2-digit' })
-    });
-    save();
-    showToast(`🎉 ${food.emoji} ${food.name} を食べた！ -${food.cost}pt`, 'reward');
-    render();
-  }
-
-  function deleteFood(id) {
-    state.foods = state.foods.filter(f => f.id !== id);
-    save();
-    render();
-  }
-
-  function deleteLog(id) {
-    state.logs = state.logs.filter(l => l.id !== id);
-    save();
-    showToast('削除しました');
-    render();
-  }
-
-  function resetData() {
-    if (!confirm('データをリセットしますか？')) return;
-    state = { foods: JSON.parse(JSON.stringify(DEFAULT_FOODS)), logs: [] };
-    save();
-    render();
-  }
-
-  function showToast(msg, type = 'success') {
-    const el = document.getElementById('toast');
-    el.textContent = msg;
-    el.style.background = type === 'reward' ? '#ffd700' : type === 'error' ? '#ff4444' : '#333';
-    el.style.color = type === 'reward' ? '#0a0a0f' : '#fff';
-    el.style.display = 'block';
-    el.style.animation = 'none';
-    void el.offsetWidth;
-    el.style.animation = 'slideIn 0.3s ease';
-    setTimeout(() => { el.style.display = 'none'; }, 3000);
-  }
-
-  function switchTab(name) {
-    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-      btn.classList.toggle('active', ['run','food','log'][i] === name);
-    });
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-' + name).classList.add('active');
-  }
-
-  load();
-  render();
+  });
 </script>
 </body>
 </html>
