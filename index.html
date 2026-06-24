@@ -6,6 +6,7 @@
 <title>三重・伊勢鳥羽 旅のしおり｜2泊3日の美食と参拝の旅</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -423,6 +424,28 @@
   .gnote h3{font-family:var(--mincho);font-weight:700;font-size:15px;margin:0 0 6px;color:var(--sugi)}
   .gnote p{margin:0;font-size:13px;line-height:1.85;color:#3c453a}
 
+  /* 台風・荒天メモ */
+  .alert{margin:0 0 4px;background:#fbf3e8;border:1px solid #e6c9a8;border-left:4px solid var(--shu);
+    border-radius:4px;padding:18px 20px}
+  .alert .atag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mincho);font-weight:700;
+    font-size:13px;letter-spacing:.12em;color:var(--shu);margin-bottom:9px}
+  .alert h3{font-family:var(--mincho);font-weight:700;font-size:16px;margin:0 0 8px;color:#7a2e1c;letter-spacing:.03em}
+  .alert p{margin:0 0 10px;font-size:13.5px;line-height:1.9;color:#4a3a2e}
+  .alert ul{margin:0;padding:0;list-style:none}
+  .alert li{font-size:13px;line-height:1.8;color:#4a3a2e;padding-left:18px;position:relative;margin-bottom:5px}
+  .alert li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:1px;background:var(--shu)}
+  .alert li b{color:#7a2e1c}
+  .alert .upd{font-size:11.5px;color:#9a7a5e;margin:10px 0 0;letter-spacing:.02em}
+
+  /* 埋め込み地図 */
+  .mapwrap{margin:18px 0 8px;border-radius:6px;overflow:hidden;border:1px solid var(--line);
+    box-shadow:0 2px 14px rgba(22,49,40,.1)}
+  #okageMap{height:340px;width:100%;background:linear-gradient(135deg,var(--sugi),var(--matsu))}
+  .leaflet-popup-content-wrapper{border-radius:6px;font-family:var(--gothic)}
+  .leaflet-popup-content{margin:11px 13px;font-size:12.5px;line-height:1.7}
+  .leaflet-popup-content b{font-family:var(--mincho);font-size:13.5px;color:var(--sugi);display:block;margin-bottom:2px}
+  .maplink-row{display:flex;justify-content:flex-end;margin-top:9px}
+
 </style>
 </head>
 <body>
@@ -482,12 +505,27 @@
           <dt>日程</dt><dd>6月27日 〜 6月29日（2泊3日）</dd>
           <dt>移動</dt><dd>飛行機（福岡⇔中部国際空港）／高速船「津エアポートライン」／近鉄・JR・路線バス</dd>
           <dt>宿泊</dt><dd>1日目：コンフォートホテル伊勢（伊勢市駅前）<br>2日目：鳥羽国際ホテル（温泉・海の幸）</dd>
-          <dt>便利</dt><dd>近鉄の観光パス「まわりゃんせ」が往復特急・現地バス・水族館入場までカバー</dd>
+          <dt>注意</dt><dd>高速船は予約制（津なぎさまち⇔中部国際空港）。荒天時は欠航もあるため、出発前に運航状況の確認を</dd>
         </dl>
       </div>
     </div>
   </div>
 </section>
+
+<div class="wrap" style="margin-bottom:6px">
+  <div class="alert reveal">
+    <span class="atag">⚠ 台風・荒天時の備え</span>
+    <h3>旅行中に台風が接近する見込みです</h3>
+    <p>6/27（土）にかけて台風が東海道沖へ進み、27日夜〜28日頃に大荒れ・大しけのおそれがあります。安全第一で、無理のない行動を。最新の進路は気象庁・tenki.jp等で随時ご確認ください。</p>
+    <ul>
+      <li><b>高速船は欠航前提で</b>：海上は「大しけ」で運休の可能性大。往復とも電車ルートを代替に（往路＝名古屋経由のプランB、復路＝鳥羽→名古屋→ミュースカイ→セントレア）</li>
+      <li><b>飛行機</b>：欠航・遅延に備え、航空会社の運航情報をこまめに確認</li>
+      <li><b>出発前チェック</b>：航空会社／津エアポートライン／JR・近鉄の運行情報、宿のキャンセル規定</li>
+      <li><b>2日目（28日）</b>は雨風が強い時間帯。内宮・おかげ横丁は雨具必須、海沿いや増水箇所には近づかない</li>
+    </ul>
+    <p class="upd">※2026年6月24日時点の予報に基づく注意書きです。状況は変わるため、必ず最新情報を確認してください。</p>
+  </div>
+</div>
 
 <!-- ============ 1日目 ============ -->
 <section class="day day1" id="day1">
@@ -506,7 +544,7 @@
         <div class="day-vtitle">神都へ参る</div>
         <div class="day-vsub">福岡から伊勢へ</div>
       </div>
-      <span class="day-badge">6 / 27 (金)</span>
+      <span class="day-badge">6 / 27 (土)</span>
     </div>
 
     <div class="timeline">
@@ -555,37 +593,17 @@
         <div class="tl-time">15:30</div>
         <div class="tl-main">
           <h3><span class="pin">⌂</span>ホテルにチェックイン</h3>
-          <p>A・B共通。コンフォートホテル伊勢へ。参拝の疲れを癒やし、夜の松阪牛に向けてひと休み。</p>
+          <p>A・B共通。コンフォートホテル伊勢へ。参拝の疲れを癒やし、夜の食事に向けてひと休み。</p>
           <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=コンフォートホテル伊勢" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
         </div>
       </div>
 
       <div class="tl-row reveal">
-        <div class="tl-time">18:30</div>
+        <div class="tl-time">17:00</div>
         <div class="tl-main">
-          <h3><span class="pin">★</span>極上・松阪牛ディナー</h3>
-          <p>伊勢市駅周辺で、三大和牛のひとつ松阪牛を堪能。気分にあわせて選べる厳選3店。</p>
-          <div class="eatery-head">厳選おすすめ店</div>
-          <div class="eateries">
-            <div class="eatery">
-              <div class="n">i</div>
-              <h5>ステーキの石かわ 伊勢店</h5>
-              <p>ホテル1F。落ち着いた空間で松阪牛ステーキコースを。</p>
-              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ステーキの石かわ%20伊勢店" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
-            </div>
-            <div class="eatery">
-              <div class="n">ii</div>
-              <h5>豚捨 外宮前店</h5>
-              <p>徒歩5分。老舗精肉店直営のすき焼き・あみ焼き・牛鍋。</p>
-              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=豚捨%20外宮前店" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
-            </div>
-            <div class="eatery">
-              <div class="n">iii</div>
-              <h5>牛串焼き 新羅</h5>
-              <p>駅前商店街。1本単位で気軽につまめる串焼きの名店。</p>
-              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=牛串焼き%20新羅%20伊勢" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
-            </div>
-          </div>
+          <h3><span class="pin">★</span>酒場森下 別館で夕食</h3>
+          <p>17:00〜19:00。伊勢市駅にほど近い本町の人気居酒屋「酒場森下」の別館（本館の隣）。酒屋さんが営むだけあって県内外の日本酒が豊富で、半合から楽しめます。新鮮な刺身の盛り合わせや貝の塩焼きが評判。予約済みでも、念のため到着時に受付を（日曜定休／6/27は土曜で営業）。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=酒場森下%20別館%20伊勢市" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
         </div>
       </div>
     </div>
@@ -612,7 +630,7 @@
         <div class="day-vtitle">祈りと賑わい</div>
         <div class="day-vsub">横丁の美食と内宮</div>
       </div>
-      <span class="day-badge">6 / 28 (土)</span>
+      <span class="day-badge">6 / 28 (日)</span>
     </div>
 
     <div class="timeline">
@@ -682,7 +700,7 @@
         <div class="day-vtitle">海をめぐる</div>
         <div class="day-vsub">水族館と名古屋めし</div>
       </div>
-      <span class="day-badge">6 / 29 (日)</span>
+      <span class="day-badge">6 / 29 (月)</span>
     </div>
 
     <div class="timeline">
@@ -1003,6 +1021,12 @@
   <section class="ksection">
     <div class="wrap">
       <div class="khead reveal"><h2>看板グルメ</h2><span class="en">Must-eat</span></div>
+      <div class="mapwrap reveal">
+        <div id="okageMap"></div>
+      </div>
+      <p class="maplink-row reveal">
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=おかげ横丁" target="_blank" rel="noopener">Googleマップで開く <span class="ar">↗</span></a>
+      </p>
       <div class="gcards">
         <div class="gcard reveal">
           <div class="gimg">
@@ -1012,6 +1036,7 @@
             <h3>赤福本店</h3>
             <span class="est">since 1707</span>
             <p>宝永4年（1707年）創業。つくりたての赤福餅を、店内の「お召し上がり盆」（赤福2つ＋ほうじ茶）で。やわらかな餅とこし餡の素朴な甘さは、五十鈴川のせせらぎをかたどった姿です。夏は赤福氷も。</p>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=赤福本店" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
           </div>
         </div>
         <div class="gcard reveal">
@@ -1020,6 +1045,7 @@
             <h3>豚捨（ぶたすて）のコロッケ</h3>
             <span class="est">since 1909</span>
             <p>明治42年創業の老舗精肉店。名物コロッケ（税込100円）は1日1,000個売れることもある行列の人気者。サクッと軽く、食べ歩きにちょうど良いサイズ。店内では伊勢肉の牛丼やすき焼きも。</p>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=豚捨%20おかげ横丁" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
           </div>
         </div>
         <div class="gcard reveal">
@@ -1046,6 +1072,7 @@
             <h3>伊勢プリンの鉄人</h3>
             <span class="est">Ise Pudding</span>
             <p>おはらい町のプリン専門店。マダガスカル産の最高級バニラを使い、職人が店内で手づくり。日本初という実演の「プリントースト」や、プリンにソフトをのせた「プリンソフト」が行列の人気。「なめらかプリン」の生みの親・所パティシエ監修です。</p>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=伊勢プリンの鉄人" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
           </div>
         </div>
         <div class="gcard reveal">
@@ -1098,6 +1125,7 @@
           <div class="ic">🍦</div>
           <h3>豆腐庵山中のおとうふソフト</h3>
           <p>五十鈴川の水と天然にがりで作るお豆腐屋さんのスイーツ。豆腐入りのさっぱりソフト（320円ほど）や、おからの「うの花どーなつ」が食べ歩きに人気。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=豆腐庵山中" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
         </div>
         <div class="kcard reveal">
           <div class="ic">🍠</div>
@@ -1108,11 +1136,13 @@
           <div class="ic">🐟</div>
           <h3>若松屋の揚げ練り物</h3>
           <p>創業100年超のかまぼこ店。揚げたての「ひりょうず」やチーズはんぺん棒など、アツアツの練り物を片手で頬張れます。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=若松屋%20おかげ横丁" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
         </div>
         <div class="kcard reveal">
           <div class="ic">☕</div>
           <h3>五十鈴川カフェ</h3>
           <p>おはらい町から少し奥まった、五十鈴川を望むカフェ。ネルドリップの本格コーヒーとスイーツで、歩き疲れにひと休みを。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=五十鈴川カフェ" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
         </div>
         <div class="kcard reveal">
           <div class="ic">🍣</div>
@@ -1128,6 +1158,7 @@
           <div class="ic">🍡</div>
           <h3>へんば餅（へんばや商店）</h3>
           <p>安永4年（1775年）創業。米粉の餅皮にこし餡を包み、両面を香ばしく焼いた素朴な餅。名は、宮川の渡しで参宮客が馬を返した「返馬（へんば）」に由来します。1個80円ほどで、店先で焼きたてを。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=へんばや商店%20おはらい町店" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
         </div>
         <div class="kcard reveal">
           <div class="ic">🍧</div>
@@ -1138,6 +1169,7 @@
           <div class="ic">🍵</div>
           <h3>太閤出世餅</h3>
           <p>永禄8年（1565年）創業。つぶ餡を包んで手焼きにした素朴な餅で、天下人・豊臣秀吉が「美味也」と賞賛したのが名の由来とか。内宮宇治橋前の茶屋でいただけます。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=太閤出世餅" target="_blank" rel="noopener">MAP <span class="ar">↗</span></a>
         </div>
         <div class="kcard reveal">
           <div class="ic">🍡</div>
@@ -1156,6 +1188,7 @@
   </section>
 </main><!-- /page-food -->
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1240,6 +1273,45 @@
     document.querySelectorAll('.page').forEach(function(p){ p.hidden = (p.id !== id); });
     var pg = document.getElementById(id);
     if(pg){ pg.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }
+    if(id === 'page-food'){ requestAnimationFrame(initOkageMap); }
+  }
+
+  // ===== おかげ横丁グルメマップ（Leaflet / OpenStreetMap・APIキー不要） =====
+  var okageMapInstance = null;
+  function initOkageMap(){
+    var el = document.getElementById('okageMap');
+    if(!el || typeof L === 'undefined') return;
+
+    if(!okageMapInstance){
+      okageMapInstance = L.map('okageMap', { scrollWheelZoom: false });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(okageMapInstance);
+
+      var spots = [
+        { lat: 34.4624294, lng: 136.7228539, name: 'おかげ横丁', note: '横丁の中心エリア', q: 'おかげ横丁' },
+        { lat: 34.4643749, lng: 136.7229816, name: 'へんばや商店', note: 'へんば餅・1775年創業', q: 'へんばや商店 おはらい町店' },
+        { lat: 34.4626629, lng: 136.7235667, name: '赤福本店', note: '赤福餅・1707年創業', q: '赤福本店' },
+        { lat: 34.4625768, lng: 136.7228863, name: '若松屋', note: '揚げ練り物・ひりょうず', q: '若松屋 おかげ横丁' },
+        { lat: 34.4620693, lng: 136.7229009, name: '豚捨', note: '名物コロッケ', q: '豚捨 おかげ横丁' },
+        { lat: 34.4618861, lng: 136.7236717, name: '五十鈴川カフェ', note: '川辺の人気カフェ', q: '五十鈴川カフェ' },
+        { lat: 34.461304,  lng: 136.7232930, name: '豆腐庵山中', note: 'おとうふソフト', q: '豆腐庵山中' },
+        { lat: 34.4607533, lng: 136.7233957, name: '伊勢プリンの鉄人', note: 'プリントースト', q: '伊勢プリンの鉄人' },
+        { lat: 34.4597541, lng: 136.7224704, name: '太閤出世餅', note: '1565年創業・宇治橋前', q: '太閤出世餅' }
+      ];
+
+      var bounds = [];
+      spots.forEach(function(s){
+        var marker = L.marker([s.lat, s.lng]).addTo(okageMapInstance);
+        marker.bindPopup('<b>' + s.name + '</b>' + s.note +
+          '<br><a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.q) +
+          '" target="_blank" rel="noopener">Googleマップで開く ↗</a>');
+        bounds.push([s.lat, s.lng]);
+      });
+      okageMapInstance.fitBounds(bounds, { padding: [26, 26] });
+    }
+    setTimeout(function(){ if(okageMapInstance) okageMapInstance.invalidateSize(); }, 60);
   }
 
   document.querySelectorAll('[data-nav]').forEach(function(a){
